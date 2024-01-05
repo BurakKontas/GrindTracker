@@ -1,0 +1,8 @@
+Screens:
+    - MainScreen (En üstte önce server seçtiricez sonra onun duyurularını çekecek liste halinde göstericek)
+    - GrindSummary
+    - GrindItemDropsAndAP/DP
+    - BossTimer
+    - Enchantment Simulator
+    - Cahpras Calculator
+    - Settings (AP DP ayarı felan olacak)

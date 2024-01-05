@@ -1,0 +1,135 @@
+{
+  "manifest_version": 1,
+  "type": "WebApp",
+  "meta": {
+    "name": "GrindTracker",
+    "version": "1.0.8",
+    "minimum-overwolf-version": "0.120.0",
+    "author": "BurakKontass",
+    "icon": "icons/icon.png",
+    "icon_gray": "icons/icon.png",
+    "launcher_icon": "icons/icon.ico",
+    "window_icon": "icons/icon.png",
+    "description": "Grind Tracker"
+  },
+  "permissions": [
+    "GameInfo",
+    "Hotkeys",
+    "Tray"
+  ],
+  "data": {
+    "url_protocol": {
+      "scheme": "overwolf-extension"
+    },
+    "externally_connectable": {
+      "matches": [
+        "*://*.overwolf.com/*"
+      ]
+    },
+    "start_window": "background",
+    "hotkeys": {
+      "app_showhide": {
+        "title": "Show/Hide App",
+        "action-type": "custom",
+        "default": "F10",
+        "passthrough": true
+      },
+      "grind_tracker_showhide": {
+        "title": "Show/Hide Grind Tracker",
+        "action-type": "custom",
+        "default": "F11",
+        "passthrough": true
+      },
+      "timer_showhide": {
+        "title": "Show/Hide Boss Timer",
+        "action-type": "custom",
+        "default": "F12",
+        "passthrough": true
+      }
+    },
+    "windows": {
+      "background": {
+        "file": "background/background.html",
+        "background_optimization": false,
+        "is_background_page": true
+      },
+      "app_window": {
+        "file": "app_window/app_window.html",
+        "focus_game_takeover": "ReleaseOnHidden",
+        "focus_game_takeover_release_hotkey": "app_showhide",
+        "native_window": true,
+        "block_top_window_navigation": true,
+        "popup_blocker": true,
+        "mute": true,
+        "transparent": true,
+        "resizable": false,
+        "override_on_update": true,
+        "size": {
+          "width": 1212,
+          "height": 699
+        }
+      },
+      "grind_tracker": {
+        "file": "grind_tracker/grind_tracker.html",
+        "focus_game_takeover": "ReleaseOnHidden",
+        "focus_game_takeover_release_hotkey": "grind_tracker_showhide",
+        "transparent": true,
+        "resizable": false,
+        "keep_window_location": true,
+        "in_game_only": false,
+        "block_top_window_navigation": true,
+        "popup_blocker": true,
+        "native_window": true,
+        "disable_hardware_acceleration": true,
+        "mute": true,
+        "size": {
+          "width": 800,
+          "height": 300
+        }
+      },
+      "timer": {
+        "file": "timer/timer.html",
+        "focus_game_takeover": "ReleaseOnHidden",
+        "focus_game_takeover_release_hotkey": "timer_showhide",
+        "transparent": true,
+        "resizable": false,
+        "keep_window_location": true,
+        "in_game_only": false,
+        "block_top_window_navigation": true,
+        "popup_blocker": true,
+        "native_window": true,
+        "disable_hardware_acceleration": true,
+        "mute": true,
+        "size": {
+          "width": 300,
+          "height": 100
+        }
+      }
+    },
+    "game_targeting": {
+      "type": "dedicated",
+      "game_ids": [
+        10864
+      ]
+    },
+    "game_events": [],
+    "launch_events": [
+      {
+        "event": "GameLaunch",
+        "event_data": {
+          "game_ids": [
+            10864
+          ]
+        },
+        "start_minimized": true,
+        "show_in_overlay": true,
+        "window_id": "shared_window"
+      }
+    ],
+    "developer": {
+      "enable_auto_refresh": true,
+      "reload_delay": 1000,
+      "filter": "*.*"
+    }
+  }
+}
