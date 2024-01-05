@@ -51,6 +51,8 @@ class BackgroundController {
     this._windows = {
       [kWindowNames.app]: new OWWindow(kWindowNames.app),
       [kWindowNames.grindTracker]: new OWWindow(kWindowNames.grindTracker),
+      [kWindowNames.timer]: new OWWindow(kWindowNames.timer),
+      [kWindowNames.desktop]: new OWWindow(kWindowNames.desktop),
     };
 
     //Should be available using overwolf.windows.getMainWindow()
@@ -60,7 +62,13 @@ class BackgroundController {
 
   async run() {
     this._gameListener.start();
-    this._windows[kWindowNames.app].restore();
+
+    const currWindowName = (await this.isGameRunning())
+      ? kWindowNames.inGame
+      : kWindowNames.desktop;
+
+    this._windows[currWindowName].restore();
+
   }
 
   showGrindTracker() {
@@ -76,12 +84,22 @@ class BackgroundController {
     }
 
     if (await this.isGameRunning()) {
-      this._windows[kWindowNames.app].restore();
+      this._windows[kWindowNames.desktop].close();
+      this._windows[kWindowNames.inGame].restore();
+    } else {
+      this._windows[kWindowNames.desktop].restore();
+      this._windows[kWindowNames.inGame].close();
     }
   }
 
-  toggleWindows() {
-    this._windows[kWindowNames.app].restore();
+  toggleWindows(info) {
+    if (info.isRunning) {
+      this._windows[kWindowNames.desktop].close();
+      this._windows[kWindowNames.inGame].restore();
+    } else {
+      this._windows[kWindowNames.desktop].restore();
+      this._windows[kWindowNames.inGame].close();
+    }
   }
 
 

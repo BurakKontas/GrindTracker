@@ -71,10 +71,8 @@ export class AppWindow {
     });
 
     closeButton.addEventListener("click", async () => {
-      if (windowName === kWindowNames.app) await this.currWindow.hide();
+      if (windowName === kWindowNames.desktop) await this.currWindow.hide();
       else this.currWindow.close();
-
-
     });
 
     minimizeButton.addEventListener("click", () => {

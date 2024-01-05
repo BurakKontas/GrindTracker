@@ -53,15 +53,27 @@
         "background_optimization": false,
         "is_background_page": true
       },
+      "desktop": {
+        "file": "desktop/desktop.html",
+        "native_window": true,
+        "desktop_only": true,
+        "transparent": true,
+        "resizable": false,
+        "override_on_update": true,
+        "size": {
+          "width": 1212,
+          "height": 699
+        }
+      },
       "app_window": {
         "file": "app_window/app_window.html",
         "focus_game_takeover": "ReleaseOnHidden",
         "focus_game_takeover_release_hotkey": "app_showhide",
-        "native_window": true,
         "block_top_window_navigation": true,
         "popup_blocker": true,
         "mute": true,
         "transparent": true,
+        "in_game_only": true,
         "resizable": false,
         "override_on_update": true,
         "size": {

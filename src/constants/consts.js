@@ -2,6 +2,7 @@ export const kWindowNames = {
   app: "app_window",
   grindTracker: "grind_tracker",
   background: "background",
+  desktop: "desktop",
 };
 
 export const kHotkeys = {

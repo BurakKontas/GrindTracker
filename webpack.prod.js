@@ -11,6 +11,7 @@ module.exports = (env) => ({
     app_window: "./src/windows/app_window/app_window.js",
     grind_tracker: "./src/windows/grind_tracker/grind_tracker.js",
     timer: "./src/windows/timer/timer.js",
+    desktop: "./src/windows/desktop/desktop.js",
   },
   output: {
     path: path.join(__dirname, "/dist"),
@@ -69,6 +70,11 @@ module.exports = (env) => ({
       template: "./src/windows/app_window/app_window.html",
       filename: "app_window/app_window.html",
       chunks: ["app_window"],
+    }),
+    new HtmlWebpackPlugin({
+      template: "./src/windows/desktop/desktop.html",
+      filename: "desktop/desktop.html",
+      chunks: ["desktop"],
     }),
     new HtmlWebpackPlugin({
       template: "./src/windows/grind_tracker/grind_tracker.html",
