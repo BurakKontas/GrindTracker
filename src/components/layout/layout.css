@@ -1,0 +1,34 @@
+/* layout.css */
+
+.layout-container {
+    display: flex;
+}
+
+.drawer-menu-container {
+    width: 50px;
+    /* Initial width for the icon */
+    transition: width 0.3s ease;
+    /* Add a smooth transition effect */
+    background-color: #272727;
+    overflow: hidden;
+}
+
+.drawer-menu-container:hover {
+    width: 200px;
+    /* Expanded width on hover */
+}
+
+.content-container {
+    flex-grow: 1;
+    transition: margin-left 0.3s ease;
+    /* Add a smooth transition effect */
+    margin-left: 0;
+    /* Set initial margin to 0 */
+}
+
+.drawer-menu-container:hover+.content-container {
+    margin-left: 150px;
+    /* Adjust the margin when menu is expanded */
+}
+
+/* ... rest of your styles ... */

@@ -5,31 +5,31 @@ import React from "react";
 import { Provider } from "react-redux";
 import store from "../redux/store";
 import About from "./About";
+import AuthProvider from "../hooks/useAuth";
+import Layout from "../components/layout/layout";
 
-function Layout() {
-  const MyRoutes = () => {
-    return (
-      <Routes>
-        <Route path="/" element={<Homepage />} />
-        <Route path="/about" element={<About />} />
-      </Routes>
-    );
-  };
-
+const MyRoutes = () => {
   return (
     <div className="container">
-      <MyRoutes></MyRoutes>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Homepage />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
+      </Layout>
     </div>
   );
-}
+};
 
 function App() {
   try {
     return (
       <Provider store={store}>
-        <HashRouter>
-          <Layout></Layout>
-        </HashRouter>
+        <AuthProvider>
+          <HashRouter>
+            <MyRoutes />
+          </HashRouter>
+        </AuthProvider>
       </Provider>
     );
   } catch (error) {
