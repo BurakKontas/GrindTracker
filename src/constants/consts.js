@@ -14,3 +14,10 @@ export const kHotkeys = {
 export const EVENTS = {
 
 };
+
+export const kGamesFeatures = new Map([
+  // Black Desert Online
+  [10864, []],
+]);
+
+export const kGameClassIds = Array.from(kGamesFeatures.keys());

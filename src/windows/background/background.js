@@ -4,7 +4,7 @@ import {
   OWGames,
   OWHotkeys,
 } from "@overwolf/overwolf-api-ts";
-import { kHotkeys, kWindowNames } from "../../constants/consts";
+import { kHotkeys, kWindowNames, kGameClassIds } from "../../constants/consts";
 import { EventBus } from "../../classes/EventBus";
 
 const HOTKEY_NAMES = {
@@ -62,7 +62,8 @@ class BackgroundController {
 
   async run() {
     this._gameListener.start();
-
+    this._windows[kWindowNames.desktop].restore();
+    
     const currWindowName = (await this.isGameRunning())
       ? kWindowNames.inGame
       : kWindowNames.desktop;
@@ -93,6 +94,9 @@ class BackgroundController {
   }
 
   toggleWindows(info) {
+    if (!info || !this.isSupportedGame(info)) {
+      return;
+    }
     if (info.isRunning) {
       this._windows[kWindowNames.desktop].close();
       this._windows[kWindowNames.inGame].restore();
@@ -138,6 +142,16 @@ class BackgroundController {
     );
 
     OWHotkeys.onHotkeyDown(HOTKEY_NAMES.timerToggle, toggleHotkeyWindow);
+  }
+
+    async isSupportedGameRunning() {
+    const info = await OWGames.getRunningGameInfo();
+    console.log('isSupportedGameRunning():', info);
+
+    return info && info.isRunning && this.isSupportedGame(info);
+  }
+  isSupportedGame(info) {
+    return kGameClassIds.includes(info.classId);
   }
 
   async isGameRunning() {

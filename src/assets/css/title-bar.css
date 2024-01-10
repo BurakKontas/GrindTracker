@@ -1,3 +1,7 @@
+body {
+  font-family: "Roboto Mono", monospace;
+}
+
 .toggle-icons svg {
   position: absolute;
   top: 0;
@@ -36,6 +40,10 @@
   padding-left: 8px;
   margin: 0;
   cursor: inherit;
+}
+
+.app-header #app-name {
+  width: 12em;
 }
 
 .app-header .hotkey-text {
@@ -211,4 +219,24 @@ button {
 
 button:focus {
   outline: none;
+}
+
+#hotkeys-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0px 12em 0px 12em;
+  height: 100%;
+}
+
+
+#hotkeys-container code {
+  /* font-size: 1.2em; */
+  font-weight: 700;
+  color: #fff;
+  background-color: #272727;
+  padding: 0.2em 0.4em;
+  border-radius: 0.2em;
 }
