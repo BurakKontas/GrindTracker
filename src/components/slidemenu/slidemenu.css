@@ -37,6 +37,6 @@
 .slide-menu-container {
     display: flex;
     flex-direction: column;
-    height: 94.5%;
+    height: 94.3%;
     justify-content: space-between;
 }

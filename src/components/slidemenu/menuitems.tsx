@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChartImage, HomePageImage, FireImage, AlarmImage, SettingsImage } from '../../constants/base64images';
+import { ChartImage, HomePageImage, FireImage, AlarmImage, SettingsImage, SwordShieldImage } from '../../constants/base64images';
 
 
 export type MenuItemsPropsType = {
@@ -22,7 +22,7 @@ export const MenuItems: MenuItemsPropsType[] = [
         path: "/summary",
     },
     {
-        Icon: <FireImage />,
+        Icon: <SwordShieldImage />,
         name: "Grindspots",
         path: "/grindspots",
     },

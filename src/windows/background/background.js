@@ -65,7 +65,7 @@ class BackgroundController {
     this._windows[kWindowNames.desktop].restore();
     
     const currWindowName = (await this.isGameRunning())
-      ? kWindowNames.inGame
+      ? kWindowNames.app
       : kWindowNames.desktop;
 
     this._windows[currWindowName].restore();
@@ -86,10 +86,10 @@ class BackgroundController {
 
     if (await this.isGameRunning()) {
       this._windows[kWindowNames.desktop].close();
-      this._windows[kWindowNames.inGame].restore();
+      this._windows[kWindowNames.app].restore();
     } else {
       this._windows[kWindowNames.desktop].restore();
-      this._windows[kWindowNames.inGame].close();
+      this._windows[kWindowNames.app].close();
     }
   }
 
@@ -99,10 +99,10 @@ class BackgroundController {
     }
     if (info.isRunning) {
       this._windows[kWindowNames.desktop].close();
-      this._windows[kWindowNames.inGame].restore();
+      this._windows[kWindowNames.app].restore();
     } else {
       this._windows[kWindowNames.desktop].restore();
-      this._windows[kWindowNames.inGame].close();
+      this._windows[kWindowNames.app].close();
     }
   }
 

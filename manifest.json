@@ -6,10 +6,10 @@
     "version": "1.0.8",
     "minimum-overwolf-version": "0.120.0",
     "author": "BurakKontass",
-    "icon": "icons/icon.png",
-    "icon_gray": "icons/icon.png",
-    "launcher_icon": "icons/icon.ico",
-    "window_icon": "icons/icon.png",
+    "icon": "icons/filtered_icon.png",
+    "icon_gray": "icons/filtered_icon.png",
+    "launcher_icon": "icons/filtered_icon.ico",
+    "window_icon": "icons/filtered_icon.png",
     "description": "Grind Tracker"
   },
   "permissions": [

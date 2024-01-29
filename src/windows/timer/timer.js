@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { createRoot } from "react-dom";
-import GrindTracker from "../../pages/GrindTracker/GrindTracker";
+import Timer from "../../pages/Timer/Timer";
 import "../../assets/css/title-bar.css";
 import { AppWindow } from "../../classes/AppWindow";
 import { kWindowNames } from "../../constants/consts";
@@ -11,7 +11,7 @@ const Root = () => {
     new AppWindow(kWindowNames.grindTracker);
   }, []);
 
-  return <GrindTracker />;
+  return <Timer />;
 };
 
 const rootElement = document.getElementById("root");
