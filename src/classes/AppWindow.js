@@ -23,18 +23,19 @@ export class AppWindow {
     this.setDrag(header);
 
     const trayMenu = {
-      "menu_items": [{
-              "label": "Show",
-              "id": "app_showhide"
-          },
-          {
-              "label": "Exit",
-              "id": "app_exit"
-          },
-          {
-            "label": "Settings",
-            "id": "app_settings"
-          }
+      "menu_items": [
+        {
+            "label": "Show",
+            "id": "app_showhide"
+        },
+        {
+          "label": "Shortcuts",
+          "id": "app_settings"
+        },
+        {
+            "label": "Exit",
+            "id": "app_exit"
+        },
       ]
     };
 

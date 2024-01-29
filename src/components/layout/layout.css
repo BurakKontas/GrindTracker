@@ -22,6 +22,6 @@
 }
 
 .drawer-menu-container:hover+.content-container {
-    margin-left: -150px;
+    margin-left: 150px;
 }
 

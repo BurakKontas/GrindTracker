@@ -11,8 +11,10 @@
   "author": "BurakKontass",
   "license": "ISC",
   "dependencies": {
+    "@ant-design/icons": "^5.2.6",
     "@overwolf/overwolf-api-ts": "^1.3.0",
     "@overwolf/types": "^3.23.1",
+    "antd": "^5.12.8",
     "axios": "^1.3.4",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.3",
@@ -33,6 +35,7 @@
     "@babel/core": "^7.21.4",
     "@babel/preset-env": "^7.21.4",
     "@babel/preset-react": "^7.18.6",
+    "@types/antd": "^1.0.0",
     "babel-loader": "^9.1.2",
     "eslint": "^8.37.0",
     "eslint-plugin-react": "^7.32.2",

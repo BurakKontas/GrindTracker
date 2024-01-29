@@ -1,0 +1,42 @@
+.menu-item-container {
+    display: flex;
+    padding-left: 13px;
+    align-items: center;
+}
+
+.menu-item-icon {
+    color:white;
+    font-size: 25px;
+    margin-right: 15px;
+    margin-top: 10px;
+    margin-left: -3px;
+}
+
+.menu-item-text {
+    color:white;
+    font-size: 15px;
+    pointer-events: none;
+    margin-top: 17px;
+    /* set max line to 1*/
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.menu-item-container:hover {
+    background-color: #343434;
+}
+
+.menu-item-container.selected {
+    background-color: #393939;
+}
+
+.menu-item-container.selected:hover {
+    background-color: #3f3f3f;
+}
+
+.slide-menu-container {
+    display: flex;
+    flex-direction: column;
+    height: 94.5%;
+    justify-content: space-between;
+}

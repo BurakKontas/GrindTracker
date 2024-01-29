@@ -1,5 +1,6 @@
 import React from "react";
 import "./layout.css";
+import SlideMenu from "../slidemenu/slidemenu";
 
 export type LayoutPropsType = {
     children: React.ReactNode;
@@ -9,7 +10,7 @@ const Layout: React.FC<LayoutPropsType> = (props) => {
     return (
         <div className="layout-container">
             <div className="drawer-menu-container">
-                {/* Your icon or menu content goes here */}
+                <SlideMenu />
             </div>
             <div className="content-container">
                 {props.children}

@@ -3,9 +3,8 @@ import "./Timer.css";
 
 function Timer() {
     return (
-        <div className="homepage-container">
-            <p>Hello Worldsss</p>
-            <input />
+        <div className="timer-container">
+            <p>Timer</p>
         </div>
     )
 }
