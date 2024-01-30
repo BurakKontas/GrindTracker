@@ -64,7 +64,11 @@ class BackgroundController {
     this._gameListener.start();
     this._windows[kWindowNames.desktop].restore();
     
-    const currWindowName = (await this.isGameRunning())
+    let running = await this.isGameRunning()
+    let supported = await this.isSupportedGameRunning()
+    let condition = running && supported
+    console.log(running, supported, condition)
+    const currWindowName = (condition)
       ? kWindowNames.app
       : kWindowNames.desktop;
 
@@ -84,7 +88,8 @@ class BackgroundController {
       return;
     }
 
-    if (await this.isGameRunning()) {
+    if (await this.isGameRunning() && await this.isSupportedGameRunning()) {
+    console.log("Game is running and supported");
       this._windows[kWindowNames.desktop].close();
       this._windows[kWindowNames.app].restore();
     } else {
@@ -94,10 +99,11 @@ class BackgroundController {
   }
 
   toggleWindows(info) {
-    if (!info || !this.isSupportedGame(info)) {
+    if (!info || !this.isSupportedGameRunning(info)) {
       return;
     }
-    if (info.isRunning) {
+    console.log("Toggling windows", info)
+    if (info.isRunning && this.isSupportedGame(info)) {
       this._windows[kWindowNames.desktop].close();
       this._windows[kWindowNames.app].restore();
     } else {
@@ -144,12 +150,11 @@ class BackgroundController {
     OWHotkeys.onHotkeyDown(HOTKEY_NAMES.timerToggle, toggleHotkeyWindow);
   }
 
-    async isSupportedGameRunning() {
+  async isSupportedGameRunning() {
     const info = await OWGames.getRunningGameInfo();
-    console.log('isSupportedGameRunning():', info);
-
     return info && info.isRunning && this.isSupportedGame(info);
   }
+
   isSupportedGame(info) {
     return kGameClassIds.includes(info.classId);
   }

@@ -1,0 +1,133 @@
+.profile-tab-container {
+    display: flex;
+    flex-direction: row;
+    gap: 5.5rem;
+}
+
+.profile-tab-container-header h1 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.profile-tab-container-header p {
+    opacity: 0.7;
+    font-size: 0.95rem;
+    font-weight: 400;
+    margin: 0;
+}
+
+.avatar-image {
+    width: 100px;
+    height: 100px;
+    /* border-radius: 50%; */
+    /* margin-bottom: 10px; */
+}
+
+.user-info code {
+    font-size: 1rem;
+    color: #fff;
+    opacity: 0.7;
+}
+
+.username {
+    font-size: 1rem;
+    /* font-weight: bold; */
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+.user-id {
+    font-size: 1rem;
+    color: #fff;
+}
+
+.settings-tab-character-details {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.settings-tab-character-details-header h1 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.settings-tab-character-details-header p {
+    opacity: 0.7;
+    font-size: 0.95rem;
+    font-weight: 400;
+    margin: 0;
+}
+
+.delete-character-button {
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.delete-character-button:hover {
+    color: #ff0000;
+}
+
+.settings-tab-addcharacter-button {
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.settings-tab-ays {
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.settings-tab-ays.no:hover {
+    color: #ff0000;
+}
+
+.settings-tab-ays.yes:hover {
+    color: #00ff00;
+}
+
+.settings-tab-addcharacter-dialog-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 60%;
+    margin-bottom: 5px;
+}
+
+.credits-tab-container {
+    display: flex;
+    flex-direction: row;
+    gap: 5.5rem;
+}
+
+.credits-tab-container-header h1 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.credits-tab-container-header p {
+    opacity: 0.7;
+    font-size: 0.95rem;
+    font-weight: 400;
+    margin: 0;
+}

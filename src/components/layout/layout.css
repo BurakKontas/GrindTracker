@@ -4,6 +4,7 @@ header {
     background-color: #272727;
     color: #fff;
     height: 40px;
+    width: 1212px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -36,19 +37,16 @@ header h1 {
     transition: width 0.3s ease;
     background-color: #272727;
     overflow: hidden;
+    position: absolute;
+    left: 0;
+    height: 739px;
+    z-index: 9999;
 }
 
 .drawer-menu-container:hover {
-    width: 200px;
+    width: 225px;
 }
 
 .content-container {
-    flex-grow: 1;
-    transition: margin-left 0.3s ease;
-    margin-left: 0;
+    margin-left: 50px;
 }
-
-.drawer-menu-container:hover+.content-container {
-    margin-left: 150px;
-}
-
