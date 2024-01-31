@@ -141,6 +141,10 @@ function SettingsTab() {
         setDeleteIndex(null);
     };
 
+    function DeleteButton({ options }: { options: ColumnBodyOptions }) {
+        return <button onClick={() => handleDelete(options)} className="delete-character-button">Delete</button>
+    }
+
     return (
         <div className="settings-tab-container">
             <div className="settings-tab-character-details">
@@ -168,7 +172,7 @@ function SettingsTab() {
                         <Column field="level" header="Character Level" />
                         <Column field="ap" header="Character AP" />
                         <Column field="dp" header="Character DP" />
-                        <Column header="Delete" body={(_, options) => <button onClick={() => handleDelete(options)} className="delete-character-button">Delete</button>} />
+                        <Column header="Delete" body={(_, options) => <DeleteButton options={options} />} />
                     </DataTable>
                 </div>
             </div>
