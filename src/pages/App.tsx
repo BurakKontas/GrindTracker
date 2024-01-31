@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Routes, HashRouter } from "react-router-dom";
+import { PrimeReactProvider } from 'primereact/api';
 
 import { Provider } from "react-redux";
 import { store } from "../redux/store";
@@ -14,7 +15,6 @@ import TimerSettings from "./TimerSettings/TimerSettings";
 import Settings from "./Settings/Settings";
 import GrindSpots from "./Grindspots/Grindspots";
 
-import { PrimeReactProvider } from 'primereact/api';
 import 'primeflex/primeflex.css';
 import 'primereact/resources/primereact.css';
 import 'primereact/resources/themes/md-dark-indigo/theme.css';
@@ -24,18 +24,19 @@ import "./App.css";
 
 const MyRoutes = () => {
   return (
-    <div className="container">
-      <Layout>
-        <Routes>
-          {/* <Route path="/" element={<Homepage />} /> */}
-          <Route path="/" element={<Settings />} />
-          <Route path="/grindspots" element={<GrindSpots />} />
-          <Route path="/summary" element={<Summary />} />
-          <Route path="/timersettings" element={<TimerSettings />} />
-          <Route path="/settings" element={<Settings />} />
-        </Routes>
-      </Layout>
-    </div>
+    <HashRouter>
+      <div className="container">
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Homepage />} />
+            <Route path="/grindspots" element={<GrindSpots />} />
+            <Route path="/summary" element={<Summary />} />
+            <Route path="/timersettings" element={<TimerSettings />} />
+            <Route path="/settings" element={<Settings />} />
+          </Routes>
+        </Layout>
+      </div>
+    </HashRouter>
   );
 };
 
@@ -57,9 +58,7 @@ function App() {
   try {
     return (
       <Providers>
-        <HashRouter>
           <MyRoutes />
-        </HashRouter>
       </Providers>
     );
   } catch (error) {

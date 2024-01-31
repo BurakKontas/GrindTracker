@@ -9,7 +9,7 @@ export type SettingsCharacter = {
 };
 
 export const SettingsCharacterDefault = {
-    name: "Undefined",
+    name: "",
     class: Classes.WARRIOR,
     level: 0,
     ap: 0,

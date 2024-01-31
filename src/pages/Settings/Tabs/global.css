@@ -81,6 +81,7 @@
 
 .delete-character-button:hover {
     color: #ff0000;
+    scale: 1.075;
 }
 
 .settings-tab-addcharacter-button {
@@ -91,6 +92,11 @@
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
+}
+
+.settings-tab-addcharacter-button:hover {
+    color: #BBB;
+    scale: 1.05;
 }
 
 .settings-tab-ays {
@@ -105,10 +111,12 @@
 
 .settings-tab-ays.no:hover {
     color: #ff0000;
+    scale: 1.075;
 }
 
 .settings-tab-ays.yes:hover {
     color: #00ff00;
+    scale: 1.075;
 }
 
 .settings-tab-addcharacter-dialog-div {
