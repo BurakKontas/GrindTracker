@@ -68,12 +68,11 @@ class BackgroundController {
     let supported = await this.isSupportedGameRunning()
     let condition = running && supported
     console.log(running, supported, condition)
-    const currWindowName = (condition)
-      ? kWindowNames.app
-      : kWindowNames.desktop;
-
-    this._windows[currWindowName].restore();
-
+    if(condition) {
+      this._windows[kWindowNames.app].restore();
+    } else if(supported) {
+      this._windows[kWindowNames.desktop].restore();
+    }
   }
 
   showGrindTracker() {
