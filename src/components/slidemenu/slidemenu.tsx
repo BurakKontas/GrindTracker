@@ -30,7 +30,6 @@ const SlideMenu: React.FC = () => {
 
     const handleClick = (name: string, item: MenuItemsPropsType) => {
         setSelectedItem(name);
-        console.log(item);
         navigate(item.path);
     }
 

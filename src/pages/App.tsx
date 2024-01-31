@@ -21,6 +21,7 @@ import 'primereact/resources/themes/md-dark-indigo/theme.css';
 import 'primeicons/primeicons.css';
 
 import "./App.css";
+import GrindSpot from "./Grindspot/Grindspot";
 
 const MyRoutes = () => {
   return (
@@ -30,6 +31,7 @@ const MyRoutes = () => {
           <Routes>
             <Route path="/" element={<Homepage />} />
             <Route path="/grindspots" element={<GrindSpots />} />
+            <Route path="/grindspot/:id" element={<GrindSpot />} />
             <Route path="/summary" element={<Summary />} />
             <Route path="/timersettings" element={<TimerSettings />} />
             <Route path="/settings" element={<Settings />} />

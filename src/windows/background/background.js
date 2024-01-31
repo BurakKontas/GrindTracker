@@ -21,6 +21,7 @@ const WINDOW_STATES = {
 
 class BackgroundController {
   static _instance;
+  static _running;
   _windows = {};
   _gameListener;
 
@@ -67,11 +68,9 @@ class BackgroundController {
     let running = await this.isGameRunning()
     let supported = await this.isSupportedGameRunning()
     let condition = running && supported
-    console.log(running, supported, condition)
+
     if(condition) {
       this._windows[kWindowNames.app].restore();
-    } else if(supported) {
-      this._windows[kWindowNames.desktop].restore();
     }
   }
 
