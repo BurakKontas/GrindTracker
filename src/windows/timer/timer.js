@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { createRoot } from "react-dom";
+import { createRoot } from "react-dom/client";
 import Timer from "../../pages/Timer/Timer";
 import "../../assets/css/title-bar.css";
 import { AppWindow } from "../../classes/AppWindow";

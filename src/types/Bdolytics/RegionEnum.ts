@@ -1,0 +1,16 @@
+export enum BdolyticsRegion {
+    NA = 'NA',
+    EU = 'EU',
+    MENA = 'MENA',
+    RU = 'RU',
+    SEA = 'SEA',
+    TH = 'TH',
+    JP = 'JP',
+    SA = 'SA',
+    KR = 'KR',
+    TW = 'TW',
+    GT = 'GT',
+    CEU = 'CEU',
+    CNA = 'CNA',
+    CAS = 'CAS',
+}
