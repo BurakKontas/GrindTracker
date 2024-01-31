@@ -1,7 +1,7 @@
 import React from "react";
 import { createContext, useContext, useState } from "react";
 import BdolyticsService from "../service/bdolytics";
-import { BdolyticsRegion } from "../types/Bdolytics/RegionEnum";
+import { BdolyticsRegion } from "../types/Bdolytics/BdolyticsRegionEnum";
 import { BdolyticsGrindspotsPagesEnum, BdolyticsGrindspotsResponse } from "../types/Bdolytics/Grindspots";
 import { BdolyticsItemResponse } from "../types/Bdolytics/Item";
 import { BdolyticsGrindspotResponse } from "../types/Bdolytics/Grindspot";

@@ -45,20 +45,6 @@ interface Coordinates {
     data: number[][];
 }
 
-interface GrindspotData {
-    id: number;
-    name: string;
-    icon_image: string;
-    items_at_grindspot: Item[];
-    monsters_at_grindspot: Monster[];
-    titles_at_grindspot: Title[];
-    nodes_at_grindspot: Node[];
-    coordinates: Coordinates;
-    ap: number;
-    dp: number;
-    db_type: string;
-}
-
 export interface BdolyticsGrindspotResponse {
     data: {
         id: number;

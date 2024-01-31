@@ -56,19 +56,7 @@ function SettingsHeader() {
 }
 
 function Settings() {
-    const [activeTab, setActiveTab] = React.useState(1);
-    const [image, setImage] = React.useState<string | undefined>(undefined);
-    const { getGrindspots, getImage } = useBdolyticsAPI()
-
-    React.useEffect(() => {
-        async function init() {
-            // let grindspots = await getGrindspots()
-            // let imageURL = grindspots?.data[0].icon_image!
-            // let imageBase64 = await getImage(imageURL)
-        }
-        init()
-    }, [])
-
+    // const [activeTab, setActiveTab] = React.useState(1);
     return (
         <div className="settings-container">
  

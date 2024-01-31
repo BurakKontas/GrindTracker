@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-import { BdolyticsRegion } from '../types/Bdolytics/RegionEnum';
+import { BdolyticsRegion } from '../types/Bdolytics/BdolyticsRegionEnum';
 import { BdolyticsGrindspotsPagesEnum, BdolyticsGrindspotsResponse } from '../types/Bdolytics/Grindspots';
 import { BdolyticsGrindspotResponse } from '../types/Bdolytics/Grindspot';
 import { BdolyticsItemResponse } from '../types/Bdolytics/Item';

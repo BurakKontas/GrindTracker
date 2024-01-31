@@ -3,51 +3,21 @@ import "./global.css";
 import { DataTable } from 'primereact/datatable';
 import { Column, ColumnBodyOptions } from 'primereact/column';
 import { Dialog } from "primereact/dialog";
-import { Button } from "primereact/button";
+import { SettingsCharacter, SettingsCharacterDefault } from "../../../types/Settings/Character";
+import { Classes } from "../../../types/Settings/Classes";
+import { useSelector } from "react-redux";
+import { addCharacter, getCharacters, removeCharacter } from "../../../redux/Settings/slice";
+import { useAppDispatch } from "../../../redux/hooks";
 
-const CharactersTableColumns = [
-    {
-        title: 'Name',
-        dataIndex: 'name',
-        key: 'name',
-    },
-    {
-        title: 'Class',
-        dataIndex: 'class',
-        key: 'class',
-    },
-    {
-        title: 'Level',
-        dataIndex: 'level',
-        key: 'level',
-    },
-    {
-        title: 'AP',
-        dataIndex: 'ap',
-        key: 'ap',
-    },
-    {
-        title: 'DP',
-        dataIndex: 'dp',
-        key: 'dp',
-    },
-];
 
 type AddCharacterDialogProps = {
     displayModal: boolean;
     setDisplayModal: Dispatch<SetStateAction<boolean>>;
-    newCharacter: Character;
-    setNewCharacter: Dispatch<SetStateAction<Character>>;
+    newCharacter: SettingsCharacter;
+    setNewCharacter: Dispatch<SetStateAction<SettingsCharacter>>;
     dialogFooter?: React.ReactNode;
 };
 
-type Character = {
-    name: string;
-    class: string;
-    level: number;
-    ap: number;
-    dp: number;
-};
 
 function AddCharacterDialog({ displayModal, setDisplayModal, newCharacter, setNewCharacter, dialogFooter }: AddCharacterDialogProps) {
     return (
@@ -65,7 +35,13 @@ function AddCharacterDialog({ displayModal, setDisplayModal, newCharacter, setNe
             </div>
             <div className="settings-tab-addcharacter-dialog-div">
                 <label>Character Class:</label>
-                <input type="text" value={newCharacter.class} onChange={(e) => setNewCharacter({ ...newCharacter, class: e.target.value })} />
+                <select style={{ paddingRight: 83 }} value={newCharacter.class} onChange={(e) => setNewCharacter({ ...newCharacter, class: e.target.value as Classes })}>
+                    {Object.values(Classes).map((classOption) => (
+                        <option key={classOption} value={classOption}>
+                            {classOption}
+                        </option>
+                    ))}
+                </select>
             </div>
             <div className="settings-tab-addcharacter-dialog-div">
                 <label>Character Level:</label>
@@ -119,41 +95,18 @@ function AreYouSureDialog({ displayModal, setDisplayModal, dialogFooter, onYesCl
 
 
 function SettingsTab() {
-    const [characters, setCharacters] = useState([
-        { name: "Character 1", class: "Class A", level: 50, ap: 150, dp: 200 },
-        { name: "Character 2", class: "Class B", level: 55, ap: 180, dp: 220 },
-        { name: "Character 2", class: "Class B", level: 55, ap: 180, dp: 220 },
-        { name: "Character 2", class: "Class B", level: 55, ap: 180, dp: 220 },
-        { name: "Character 2", class: "Class B", level: 55, ap: 180, dp: 220 },
-        { name: "Character 2", class: "Class B", level: 55, ap: 180, dp: 220 },
-        { name: "Character 2", class: "Class B", level: 55, ap: 180, dp: 220 },
-        { name: "Character 2", class: "Class B", level: 55, ap: 180, dp: 220 },
-        { name: "Character 2", class: "Class B", level: 55, ap: 180, dp: 220 },
-        { name: "Character 2", class: "Class B", level: 55, ap: 180, dp: 220 },
-        //... existing characters
-    ]);
+    const dispatch = useAppDispatch();
+    const characters = useSelector(getCharacters);
 
-    const [newCharacter, setNewCharacter] = useState({
-        name: '',
-        class: '',
-        level: 0,
-        ap: 0,
-        dp: 0
-    });
+    const [newCharacter, setNewCharacter] = useState(SettingsCharacterDefault);
 
     const [displayModal, setDisplayModal] = useState(false);
     const [deleteConfirmation, setDeleteConfirmation] = useState(false);
     const [deleteIndex, setDeleteIndex] = useState<number | null>(null);
 
     const handleAdd = () => {
-        setCharacters([...characters, newCharacter]);
-        setNewCharacter({
-            name: '',
-            class: '',
-            level: 0,
-            ap: 0,
-            dp: 0
-        });
+        dispatch(addCharacter(newCharacter))
+        setNewCharacter(SettingsCharacterDefault);
         setDisplayModal(false);
     };
 
@@ -164,13 +117,7 @@ function SettingsTab() {
             }} onClick={handleAdd}>Add</button>
             <button className="settings-tab-ays no" onClick={() => {
                 setDisplayModal(false)
-                setNewCharacter({
-                    name: '',
-                    class: '',
-                    level: 0,
-                    ap: 0,
-                    dp: 0
-                });
+                setNewCharacter(SettingsCharacterDefault);
             }}>Cancel</button>
         </div>
     );
@@ -183,9 +130,7 @@ function SettingsTab() {
 
     const handleYesDelete = () => {
         if (deleteIndex !== null) {
-            const newCharacters = [...characters];
-            newCharacters.splice(deleteIndex, 1);
-            setCharacters(newCharacters);
+            dispatch(removeCharacter(characters[deleteIndex].name));            
         }
         setDeleteConfirmation(false);
         setDeleteIndex(null);
