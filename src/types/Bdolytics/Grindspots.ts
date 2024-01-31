@@ -15,6 +15,11 @@ interface Grindspot {
     icon_image: string;
     grade_type: number | null;
     products: Product[];
+    ap: number,
+    dp: number,
+    db_type: string,
+    main_category: any,
+    sub_category: any
 }
 
 export interface BdolyticsGrindspotsResponse {

@@ -29,7 +29,8 @@ const MyRoutes = () => {
       <div className="container">
         <Layout>
           <Routes>
-            <Route path="/" element={<Homepage />} />
+            {/* <Route path="/" element={<Homepage />} /> */}
+            <Route path="/" element={<GrindSpots />} />
             <Route path="/grindspots" element={<GrindSpots />} />
             <Route path="/grindspot/:id" element={<GrindSpot />} />
             <Route path="/summary" element={<Summary />} />

@@ -19,8 +19,11 @@
 
 .profile-tab-container-default-character {
     display: flex;
+    width: 315px;
     flex-direction: row;
+    justify-content: space-between;
     height: 19.5px;
+    margin-bottom: 10px;
 }
 
 .avatar-image {

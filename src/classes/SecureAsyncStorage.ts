@@ -1,17 +1,16 @@
 import storage from 'redux-persist/lib/storage'
 import CryptoJS from "crypto-js";
-
-const SecretKey = "my-super-secret-key"
+import { SECRETKEY } from '../constants/secretkey';
 
 export const decrypt = (encryptedValue: string) => {
-    const bytes = CryptoJS.AES.decrypt(encryptedValue, SecretKey);
+    const bytes = CryptoJS.AES.decrypt(encryptedValue, SECRETKEY);
     const decryptedValue = bytes.toString(CryptoJS.enc.Utf8);
 
     return decryptedValue;
 }
 
 export const encrypt = (value: string) => {
-    const encryptedValue = CryptoJS.AES.encrypt(value, SecretKey).toString();
+    const encryptedValue = CryptoJS.AES.encrypt(value, SECRETKEY).toString();
 
     return encryptedValue;
 }

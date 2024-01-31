@@ -1,8 +1,11 @@
 import React from "react";
 import "./global.css";
 import { useSelector } from "react-redux";
-import { getCharacters, getDefaultCharacter, setDefaultCharacter } from "../../../redux/Settings/slice";
+import { getCharacters, getDefaultCharacter, getLanguage, getRegion, setDefaultCharacter, setLanguage, setRegion } from "../../../redux/Settings/slice";
 import { useAppDispatch } from "../../../redux/hooks";
+import { BdolyticsRegion } from "../../../types/Settings/RegionEnum";
+import { BdolyticsLanguageFlags, BdolyticsLanguages } from "../../../types/Settings/LanguageEnum";
+import { Capitalize } from "../../../helpers/capitalize";
 
 type User = {
     username?: string;
@@ -13,6 +16,8 @@ type User = {
 function ProfileTab() {
     const [user, setUser] = React.useState<User>();
     const characters = useSelector(getCharacters)
+    const region = useSelector(getRegion)
+    const language = useSelector(getLanguage)
     const defaultCharacter = useSelector(getDefaultCharacter)
     const dispatch = useAppDispatch();
 
@@ -28,6 +33,23 @@ function ProfileTab() {
             }
         });
     }, []);
+
+    const regionMap: { [key: string]: string } = {};
+    const languageMap: { [key: string]: string } = {};
+
+    for (const key in BdolyticsRegion) {
+        if (BdolyticsRegion.hasOwnProperty(key)) {
+            //@ts-ignore
+            regionMap[BdolyticsRegion[key]] = key;
+        }
+    }
+
+    for (const key in BdolyticsLanguages) {
+        if (BdolyticsLanguages.hasOwnProperty(key)) {
+            //@ts-ignore
+            languageMap[BdolyticsLanguages[key]] = key;
+        }
+    }
 
     return (
         <div className="profile-tab-container">
@@ -56,6 +78,34 @@ function ProfileTab() {
                         ) : (
                             <p style={{ marginLeft: 10 }}>No characters found.</p>
                         )}
+                    </div>
+                </div>
+                {/* Select Region */}
+                <div className="profile-tab-container-default-character">
+                    <label>Region:</label>
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                        {/* @ts-ignore */}
+                        <select style={{ marginLeft: 10, paddingRight: 98 }} value={region} onChange={(e) => dispatch(setRegion(e.target.value))}>
+                            {Object.keys(BdolyticsRegion).map((region) => (
+                                <option key={region} value={region}>
+                                    {region}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                </div>
+                {/* Select Language */}
+                <div className="profile-tab-container-default-character">
+                    <label>Language:</label>
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                        {/* @ts-ignore */}
+                        <select style={{ marginLeft: 10, paddingRight: 38 }} value={language} onChange={(e) => dispatch(setLanguage(e.target.value))}>
+                            {Object.entries(languageMap).map(([languageValue, languageKey]) => (
+                                <option key={languageValue} value={languageValue}>
+                                    <p>{languageKey}</p>
+                                </option>
+                            ))}
+                        </select>
                     </div>
                 </div>
             </div>

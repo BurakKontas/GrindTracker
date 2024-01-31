@@ -11,7 +11,7 @@ const PersistConfigs: PersistConfigsType = {
     settings: {
         key: "settings",
         storage: storage,
-        whitelist: ["characters", "defaultCharacter", "region"],
+        whitelist: ["characters", "defaultCharacter", "region", "language"],
     },
 
 }

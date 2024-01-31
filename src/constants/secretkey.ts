@@ -1,0 +1,1 @@
+export const SECRETKEY = "my-super-secret-key"

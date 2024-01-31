@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createContext, useContext, useState } from "react";
 import BdolyticsService from "../service/bdolytics";
-import { BdolyticsRegion } from "../types/Bdolytics/BdolyticsRegionEnum";
+import { BdolyticsRegion } from "../types/Settings/RegionEnum";
 import { BdolyticsGrindspotsPagesEnum, BdolyticsGrindspotsResponse } from "../types/Bdolytics/Grindspots";
 import { BdolyticsItemResponse } from "../types/Bdolytics/Item";
 import { BdolyticsGrindspotResponse } from "../types/Bdolytics/Grindspot";
+import { useAppSelector } from "../redux/hooks";
+import { getLanguage, getRegion } from "../redux/Settings/slice";
 
 export const BdolyticsAPIContext = createContext<BdolyticsAPIProviderValueType>({
     //default values
@@ -38,7 +40,14 @@ export type BdolyticsAPIProviderValueType = {
 }
 
 const BdolyticsAPIProvider: React.FC<BdolyticsAPIProviderPropsType> = (props) => {
-    const [bdolyticsService, _] = useState<BdolyticsService>(new BdolyticsService("en", BdolyticsRegion.NA));
+    const language = useAppSelector(getLanguage)
+    const region = useAppSelector(getRegion)
+    const [bdolyticsService, setBdolyticsService] = useState<BdolyticsService>(new BdolyticsService(language, region));
+
+    useEffect(() => {
+        setBdolyticsService(new BdolyticsService(language, region))
+    }, [language, region])
+
     const getGrindspots = async (page: BdolyticsGrindspotsPagesEnum = BdolyticsGrindspotsPagesEnum.PAGE1): Promise<BdolyticsGrindspotsResponse> => {
         return await bdolyticsService.getGrindspots(page);
     };

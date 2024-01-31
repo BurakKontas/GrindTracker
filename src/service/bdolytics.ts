@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-import { BdolyticsRegion } from '../types/Bdolytics/BdolyticsRegionEnum';
+import { BdolyticsRegion } from '../types/Settings/RegionEnum';
 import { BdolyticsGrindspotsPagesEnum, BdolyticsGrindspotsResponse } from '../types/Bdolytics/Grindspots';
 import { BdolyticsGrindspotResponse } from '../types/Bdolytics/Grindspot';
 import { BdolyticsItemResponse } from '../types/Bdolytics/Item';
@@ -15,7 +15,9 @@ class BdolyticsService {
     }
  
     async getGrindspots(page: BdolyticsGrindspotsPagesEnum): Promise<BdolyticsGrindspotsResponse> {
-        let response = await this.bdolytics.get<BdolyticsGrindspotsResponse>(`/grindspots?page=${page}`);
+        let response = await this.bdolytics.get<BdolyticsGrindspotsResponse>(`/grindspots?page=1`);
+        let response2 = await this.bdolytics.get<BdolyticsGrindspotsResponse>(`/grindspots?page=2`);
+        response.data.data = response.data.data.concat(response2.data.data)
         return response.data;
     }
 

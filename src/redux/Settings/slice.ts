@@ -1,11 +1,13 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 import { createAppSlice } from "../hooks";
 import { SettingsState } from "./types";
-import { BdolyticsRegion } from "../../types/Bdolytics/BdolyticsRegionEnum";
+import { BdolyticsRegion } from "../../types/Settings/RegionEnum";
 import { SettingsCharacter, SettingsCharacterDefault } from "../../types/Settings/Character";
+import { BdolyticsLanguages } from "../../types/Settings/LanguageEnum";
 
 const initialState: SettingsState = {
     characters: [],
+    language: BdolyticsLanguages.English,
     defaultCharacter: "",
     region: BdolyticsRegion.NA,
 };
@@ -20,6 +22,7 @@ export const settingsSlice = createAppSlice({
         },
         getCharacters: (state) => state.characters,
         getRegion: (state) => state.region,
+        getLanguage: (state) => state.language,
         getCharacter: (state, name: string) => state.characters.find((c) => c.name === name),
     },
     reducers: (create) => ({
@@ -44,6 +47,12 @@ export const settingsSlice = createAppSlice({
 
             state.defaultCharacter = action.payload;
         }),
+        setRegion: create.reducer<BdolyticsRegion>((state, action) => {
+            state.region = action.payload;
+        }),
+        setLanguage: create.reducer<BdolyticsLanguages>((state, action) => {
+            state.language = action.payload;
+        }),
         // fetchTodo: create.asyncThunk(
         //     async (id: string, thunkApi) => {
         //         // const res = await fetch(`myApi/todos?id=${id}`)
@@ -65,7 +74,7 @@ export const settingsSlice = createAppSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { addCharacter, removeCharacter, setDefaultCharacter } = settingsSlice.actions;
-export const { getDefaultCharacter, getCharacters, getRegion, getCharacter } = settingsSlice.selectors;
+export const { addCharacter, removeCharacter, setDefaultCharacter, setRegion, setLanguage } = settingsSlice.actions;
+export const { getDefaultCharacter, getCharacters, getRegion, getCharacter, getLanguage } = settingsSlice.selectors;
 
 export default settingsSlice.reducer;
