@@ -51,6 +51,7 @@ export const DropItem = ({ drop, type, containerStyle, inlineElement }: Props) =
                 borderWidth: 0.2,
                 borderStyle: "solid", // Add this line to specify the border style
                 display: "inline-block", // Add this line to make the div inline-block
+                padding: 1
             }}>
                 <img key={drop.id} style={{
                     width: 30,

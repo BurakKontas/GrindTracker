@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -29,6 +29,7 @@ function GrindSpot() {
     const { id } = useParams();
     const [grindspot, setGrindspot] = React.useState<BdolyticsGrindspotResponse>();
     const { getGrindspot } = useBdolyticsAPI()
+    const navigate = useNavigate()
     const [data, setData] = React.useState<GrindHeaderData>({
         name: "",
         image: ""
@@ -69,6 +70,11 @@ function GrindSpot() {
     return (
         <div className="grindspot-container">
             <div className="grindspot-left">
+                <button onClick={() => navigate("/grindspots")} className="settings-tab-addcharacter-button" style={{
+                    alignSelf: "flex-start",
+                }}>
+                    Back
+                </button>
                 <GrindHeader data={data} 
                 inlineElements={<GrindHeaderInlineElements />}
                 style={{
