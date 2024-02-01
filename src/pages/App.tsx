@@ -29,10 +29,10 @@ const MyRoutes = () => {
       <div className="container">
         <Layout>
           <Routes>
-            <Route path="/" element={<Homepage />} />
+            {/* <Route path="/" element={<Homepage />} /> */}
+            <Route path="/" element={<Summary />} />
             <Route path="/grindspots" element={<GrindSpots />} />
             <Route path="/grindspot/:id" element={<GrindSpot />} />
-            <Route path="/summary" element={<Summary />} />
             <Route path="/timersettings" element={<TimerSettings />} />
             <Route path="/settings" element={<Settings />} />
           </Routes>

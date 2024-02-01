@@ -11,15 +11,15 @@ export type MenuItemsPropsType = {
 
 
 export const MenuItems: MenuItemsPropsType[] = [
-    {
-        Icon: <HomePageImage />,
-        name: "Homepage",
-        path: "/",
-    },
+    // {
+    //     Icon: <HomePageImage />,
+    //     name: "Homepage",
+    //     path: "/",
+    // },
     {
         Icon: <ChartImage />,
         name: "Grind Summary",
-        path: "/summary",
+        path: "/",
     },
     {
         Icon: <SwordShieldImage />,
