@@ -1,13 +1,3 @@
-interface Product {
-    id: number;
-    sub_id: number;
-    name: string;
-    icon_image: string;
-    grade_type: number;
-    market_main_category: number;
-    db_type: string;
-}
-
 interface Item {
     id: number;
     sub_id: number;

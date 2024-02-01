@@ -8,3 +8,26 @@
     justify-content: center;
     align-items: center;
 }
+
+.grindspot-left {
+    width: 230px;
+}
+
+.grindspot-container {
+    height: 676px;
+    width: 1160px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    overflow: scroll;
+    padding-top: 20px;
+    padding-left: 20px;
+}
+
+.grindspot-right-item-text {
+    margin-left: 10px;
+}
+
+.grindspot-right-drop-items {
+    gap: 0px
+}
