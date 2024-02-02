@@ -36,7 +36,7 @@ export const AppHeaderButtons = () => {
 
 export const AppHeader = () => {
     return (
-        <header className="header" id="header">
+        <header className="header ow-drag">
             <AppHeaderLogo />
             <AppHeaderButtons />
         </header>

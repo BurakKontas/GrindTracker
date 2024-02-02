@@ -6,6 +6,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 150px;
 }
 
 .grindtracker-header {
@@ -20,6 +21,7 @@
     margin-bottom: 10px;
     align-self: center;
     justify-self: flex-start;
+    z-index: 999;
 }
 
 .grindtracker-grindspots {

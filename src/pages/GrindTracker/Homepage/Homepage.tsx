@@ -69,7 +69,6 @@ function Homepage() {
 
     return (
         <div className="grindtracker-container">
-            <div className="grindtracker-header" id="header"></div>
             <input 
                 className="grindtracker-search"
                 type="text" 

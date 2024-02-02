@@ -1,12 +1,16 @@
 .startup-container {
     width: 400px;
-    height: 617px;
+    height: 700px;
     color: #fff;
     background-color: #333;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-bottom: 100px;
+    margin-top: 20px;
 }
 
 .startup-grindspot-detail {
@@ -21,6 +25,7 @@
     cursor: pointer;
     align-self: flex-start;
     background-color: transparent;
+    position: absolute;
 }
 
 .startup-button:hover {
@@ -32,4 +37,5 @@
     flex-direction: row;
     gap: 5px;
     flex-wrap: wrap;
+    padding-bottom: 40px;
 }

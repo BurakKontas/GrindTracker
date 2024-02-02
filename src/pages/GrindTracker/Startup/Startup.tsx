@@ -9,6 +9,47 @@ import { useBdolyticsAPI } from "../../../hooks/useBdolyticsApi";
 import { DropItem } from "../../../components/dropitem/DropItem";
 import { BdolyticsTooltipTypes } from "../../../types/Bdolytics/TooltipTypes";
 
+import { LineChart, Tooltip, Line, YAxis } from 'recharts';
+
+
+const generateRandomDate = () => {
+    const start = new Date(2022, 0, 1); // 2022-01-01
+    const end = new Date(2022, 11, 31); // 2022-12-31
+    const randomDate = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+    const formattedDate = randomDate.toISOString().split('T')[0]; // 'YYYY-MM-DD' formatında dönüştürme
+    return formattedDate;
+};
+
+const generateRandomData = () => {
+    const newData = [];
+    for (let i = 0; i < 100; i++) {
+        newData.push({
+            date: generateRandomDate(),
+            value: Math.floor(Math.random() * 1000000000), // Rastgele bir değer
+        });
+    }
+    return newData;
+};
+
+const data = generateRandomData();
+
+const formatValue = (value: number) => {
+    const suffixes = ['', 'K', 'M', 'B', 'T']; // Sırasıyla: birim, bin, milyon, milyar, trilyon
+    let suffixIndex = 0;
+
+    while (value >= 1000) {
+        value /= 1000;
+        suffixIndex++;
+    }
+
+    return `${value.toFixed(1)}${suffixes[suffixIndex]}`;
+};
+
+const tooltipFormatter = (value: number) => {
+    const formattedValue = value.toLocaleString(); // Değeri okunabilir formata dönüştür
+    return `${formattedValue} Silver`;
+};
+
 const Startup = () => {
     const { grindspotid, id } = useParams();
     const { getGrindspot, getImage } = useBdolyticsAPI();
@@ -44,7 +85,7 @@ const Startup = () => {
 
     if(!grindspot) return <div>Loading...</div>
     return (
-        <div className="startup-container" id="header">
+        <div className="startup-container">
             <button onClick={() => navigate("/")} className="startup-button">Back</button>
             <div className="startup-grindspot-detail">
                 <img src={image} style={{ width: 100, height: 100 }} alt={grindspot!.data.name} />
@@ -60,7 +101,7 @@ const Startup = () => {
                     </span>
                 </p>
             </div>
-            <div style={{ marginBottom: 15}} className="startup-grindspot-drops">
+            <div className="startup-grindspot-drops">
                 {grindspot!.data.items_at_grindspot.map((item) => {
                     let drop = {
                         id: item.id,
@@ -73,8 +114,16 @@ const Startup = () => {
                     )
                 })}
             </div>
-            <div>Varsa önceki saatlik gümüş istatistikleri</div>
-            <button style={{ alignSelf: "center", marginTop: 15 }} className="startup-button">Start</button>
+            <div style={{ display:"flex", justifyContent:"center", alignItems:"center" }}>
+                <LineChart width={375} height={180} data={data.slice(-30)}>
+                    <YAxis tickFormatter={formatValue} />
+                    <Tooltip formatter={tooltipFormatter} />
+                    <Line type="monotone" dataKey="value" stroke="#8884d8" />
+                </LineChart>
+            </div>
+            <button 
+            onClick={() => navigate(`/tracker/${grindspotid}/${id}`)}
+            style={{ position:"absolute", bottom: 15, right:"47%" }} className="startup-button">Start</button>
         </div>
     )
 }

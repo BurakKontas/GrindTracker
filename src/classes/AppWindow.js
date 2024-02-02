@@ -11,8 +11,9 @@ export class AppWindow {
     this.currWindow = new OWWindow(windowName);
 
     try {
-      const header = document.getElementById("header");
+      const header = document.getElementsByClassName("ow-drag")[0];
       this.setDrag(header);
+    
     } catch (e) {
       console.error("Error setting up window drag", e);
     }

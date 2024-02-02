@@ -11,6 +11,7 @@ const Trakcer = () => {
             <h1>Trakcer</h1>
             <p>Grindspot: {grindspotid}</p>
             <p>Id: {id}</p>
+            <button onClick={() => console.log("Hello World")}>Hello World</button>
         </div>
     )
 }
