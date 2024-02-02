@@ -21,7 +21,7 @@ function Homepage() {
         console.log("fetching grindspots")
         const fetchGrindspots = async () => {
             const response = await getGrindspots();
-            setGrindspots(response);
+            setGrindspots(response!);
             console.log(response)
         }
         fetchGrindspots();

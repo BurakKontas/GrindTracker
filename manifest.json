@@ -95,8 +95,8 @@
         "disable_hardware_acceleration": true,
         "mute": true,
         "size": {
-          "width": 400,
-          "height": 600
+          "width": 1200,
+          "height": 800
         }
       },
       "timer": {

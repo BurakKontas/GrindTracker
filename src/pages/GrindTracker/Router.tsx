@@ -24,7 +24,9 @@ const MyRoutes = () => {
 function Router() {
     try {
         return (
+            <div style={{ display: "flex", justifyContent:"center", alignItems:"center", width:"100%", height:800}}>
             <MyRoutes />
+            </div>
         );
     } catch (error) {
         console.error(error);
