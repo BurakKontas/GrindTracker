@@ -24,6 +24,10 @@ export const useBdolyticsAPI = () => {
     }
 
     if (!context.getGrindspots) console.warn("useBdolyticsAPI.getGrindspots not implemented");
+    if (!context.getGrindspot) console.warn("useBdolyticsAPI.getGrindspot not implemented");
+    if (!context.getImage) console.warn("useBdolyticsAPI.getImage not implemented");
+    if (!context.getItem) console.warn("useBdolyticsAPI.getItem not implemented");
+    if (!context.getItems) console.warn("useBdolyticsAPI.getItems not implemented");
 
     return context;
 };

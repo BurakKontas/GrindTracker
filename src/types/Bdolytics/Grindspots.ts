@@ -8,7 +8,7 @@ interface Product {
     market_main_category: number;
 }
 
-interface Grindspot {
+export interface Grindspot {
     id: number;
     sub_id: number;
     name: string;

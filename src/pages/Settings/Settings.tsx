@@ -69,7 +69,6 @@ function Settings() {
             <CreditsTab />
             {/* <div className="divider" />
             <AboutDeveloperTab /> */}
-            <div style={{ marginBottom: 30 }} />
         </div>
     )
 }

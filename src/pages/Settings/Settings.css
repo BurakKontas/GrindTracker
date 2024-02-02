@@ -1,7 +1,8 @@
 .settings-container {
-    width: 101.8%;
+    width: 99.5%;
     height: 657px;
     padding: 20px;
+    padding-bottom: 0px;
     color: #fff;
     display: flex;
     flex-direction: column;

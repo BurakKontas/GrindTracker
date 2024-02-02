@@ -1,10 +1,10 @@
-import React from "react"
-import { useBdolyticsAPI } from "../../hooks/useBdolyticsApi"
+import React from "react";
+import { useBdolyticsAPI } from "../../hooks/useBdolyticsApi";
 
 export type GrindHeaderData = {
     name: string;
     image: string;
-}
+};
 
 type GrindHeaderProps = {
     data: GrindHeaderData;
@@ -12,28 +12,38 @@ type GrindHeaderProps = {
     imageStyle?: React.CSSProperties;
     titleStyle?: React.CSSProperties;
     inlineElements?: React.ReactNode;
-}
+};
 
 export const GrindHeader: React.FC<GrindHeaderProps> = (props) => {
-    const [image, setImage] = React.useState<string>("")
-    
-    const { getImage } = useBdolyticsAPI()
-    const data = props.data
+    const { getImage } = useBdolyticsAPI();
+    const data = props.data;
+
+    const [image, setImage] = React.useState<string | null>(null);
 
     React.useEffect(() => {
-        async function init() {
-            if(data.image == "") return
-            let image = await getImage(data.image)
-            setImage(image!)
-            console.log(image)
-        }
-        init()
-    }, [data])
+        const fetchImage = async () => {
+            // Önbellek kontrolü
+            const cachedImage = sessionStorage.getItem(`image_${data.image}`);
+            if (cachedImage) {
+                setImage(cachedImage);
+            } else {
+                // Resmi al ve önbellekte sakla
+                if (data.image !== "") {
+                    const response = await getImage(data.image);
+                    sessionStorage.setItem(`image_${data.image}`, response!);
+                    setImage(response!);
+                }
+            }
+        };
+
+        fetchImage();
+    }, [data.image, data.name, getImage]);
+
     return (
         <div style={props.style}>
-            <img src={image} style={props.imageStyle || { width: 40, height: 40 }} />
+            {image && <img src={image} style={props.imageStyle || { width: 40, height: 40 }} />}
             <span style={props.titleStyle}>{data.name}</span>
             {props.inlineElements}
         </div>
-    ) 
-}
+    );
+};

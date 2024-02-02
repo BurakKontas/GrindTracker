@@ -1,17 +1,21 @@
 import React, { useEffect } from "react";
 import { createRoot } from "react-dom/client";
-import GrindTracker from "./../../pages/GrindTracker/GrindTracker";
+import Router from "./../../pages/GrindTracker/Router";
 import "../../assets/css/title-bar.css";
 import { AppWindow } from "../../classes/AppWindow";
 import { kWindowNames } from "../../constants/consts";
-import { useRunningGame } from "overwolf-hooks";
+import { Providers } from '../../pages/App'
 
 const Root = () => {
   useEffect(() => {
     new AppWindow(kWindowNames.grindTracker);
   }, []);
 
-  return <GrindTracker />;
+  return (
+    <Providers>
+      <Router />
+    </Providers>
+  );
 };
 
 const rootElement = document.getElementById("root");

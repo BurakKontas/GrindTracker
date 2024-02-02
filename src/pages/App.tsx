@@ -29,8 +29,8 @@ const MyRoutes = () => {
       <div className="container">
         <Layout>
           <Routes>
-            {/* <Route path="/" element={<Homepage />} /> */}
-            <Route path="/" element={<Summary />} />
+            <Route path="/" element={<Homepage />} />
+            <Route path="/summary" element={<Summary />} />
             <Route path="/grindspots" element={<GrindSpots />} />
             <Route path="/grindspot/:id" element={<GrindSpot />} />
             <Route path="/timersettings" element={<TimerSettings />} />
@@ -42,14 +42,14 @@ const MyRoutes = () => {
   );
 };
 
-function Providers({ children }: { children: React.ReactElement}) {
+export function Providers({ children }: { children: React.ReactElement}) {
   return (
     <Provider store={store}>
       <AuthProvider>
         <BdolyticsAPIProvider>
-          <PrimeReactProvider>
-            {children}
-          </PrimeReactProvider>
+            <PrimeReactProvider>
+              {children}
+            </PrimeReactProvider>
         </BdolyticsAPIProvider>
       </AuthProvider>
     </Provider>

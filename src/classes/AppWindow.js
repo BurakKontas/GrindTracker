@@ -10,17 +10,50 @@ export class AppWindow {
     this.mainWindow = new OWWindow("background");
     this.currWindow = new OWWindow(windowName);
 
-    const closeButton = document.getElementById("closeButton");
-    const minimizeButton = document.getElementById("minimizeButton");
-    const hotkeyButton = document.getElementById("hotkeyButton");
+    try {
+      const header = document.getElementById("header");
+      this.setDrag(header);
+    } catch (e) {
+      console.error("Error setting up window drag", e);
+    }
 
-    const header = document.getElementById("header");
+    try {
+        const closeButton = document.getElementById("closeButton");
+        closeButton.innerHTML = windowCloseSVG;
 
-    closeButton.innerHTML = windowCloseSVG;
-    minimizeButton.innerHTML = windowMinimizeSVG;
-    hotkeyButton.innerHTML = windowHotkeySVG;
+        closeButton.addEventListener("click", async () => {
+        if (windowName === kWindowNames.desktop) await this.currWindow.hide();
+        else this.currWindow.close();
+        });
+    } catch (e) {
+        console.error("Error setting up window controls", e);
+    }
 
-    this.setDrag(header);
+    try {
+        const minimizeButton = document.getElementById("minimizeButton");
+        minimizeButton.innerHTML = windowMinimizeSVG;
+        
+        minimizeButton.addEventListener("click", () => {
+            this.currWindow.minimize();
+        });
+    } catch (e) {
+        console.error("Error setting up window controls", e);
+    }
+
+
+
+    try {
+        const hotkeyButton = document.getElementById("hotkeyButton");
+        hotkeyButton.innerHTML = windowHotkeySVG;
+
+        hotkeyButton.addEventListener("click", () => {
+            window.location.href = (windowName == kWindowNames.grindTracker) ? 
+            "overwolf://settings/games-overlay?hotkey=grind_tracker_showhide" :
+            "overwolf://settings/games-overlay?hotkey=app_showhide";
+        });
+    } catch (e) {
+        console.error("Error setting up window controls", e);
+    }
 
     const trayMenu = {
       "menu_items": [
@@ -70,22 +103,7 @@ export class AppWindow {
           break;
       }
     });
-
-    closeButton.addEventListener("click", async () => {
-      if (windowName === kWindowNames.desktop) await this.currWindow.hide();
-      else this.currWindow.close();
-    });
-
-    minimizeButton.addEventListener("click", () => {
-      this.currWindow.minimize();
-    });
-
-    hotkeyButton.addEventListener("click", () => {
-      window.location.href = (windowName == kWindowNames.grindTracker) ? 
-      "overwolf://settings/games-overlay?hotkey=grind_tracker_showhide" :
-        "overwolf://settings/games-overlay?hotkey=app_showhide";
-    });
-  }
+}
 
   async getWindowState() {
     return await this.currWindow.getWindowState();

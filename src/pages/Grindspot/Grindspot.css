@@ -11,6 +11,12 @@
 
 .grindspot-left {
     width: 230px;
+    position: fixed;
+    height: 85%;
+}
+
+.grindspot-right {
+    margin-left: 230px;
 }
 
 .grindspot-container {

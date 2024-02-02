@@ -33,12 +33,21 @@ export const DropItem = ({ drop, type, containerStyle, inlineElement }: Props) =
 
     let [image, setImage] = React.useState<string>("")
     React.useEffect(() => {
-        async function init() {
-            let image = await getImage(drop.image)
-            setImage(image!)
-        }
-        init()
-    }, [])
+        const fetchImage = async () => {
+            // Önbellek kontrolü
+            const cachedImage = sessionStorage.getItem(`image_${drop.image}`);
+            if (cachedImage) {
+                setImage(cachedImage);
+            } else {
+                // Resmi al ve önbellekte sakla
+                const response = await getImage(drop.image);
+                sessionStorage.setItem(`image_${drop.image}`, response!);
+                setImage(response!);
+            }
+        };
+
+        fetchImage();
+    }, [drop.id, drop.image, getImage]);
 
     return (
         <a href={`https://bdolytics.com/${language}/${region}/db/${type}/${drop.id}`} style={{
