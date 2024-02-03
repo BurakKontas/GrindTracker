@@ -13,6 +13,7 @@ const Tracker = () => {
     const { getGrindspot } = useBdolyticsAPI();
     const [grindspot, setGrindspot] = React.useState<BdolyticsGrindspotResponse>();
     const [isRunning, setIsRunning] = React.useState(true);
+    const [isHovering, setIsHovering] = React.useState(false);
     const navigate = useNavigate();
 
     React.useEffect(() => {
@@ -37,17 +38,24 @@ const Tracker = () => {
     }, [isRunning]); 
 
     return (
-        <div className="tracker-container">
-            <h1 className="tracker-title">{grindspot?.data.name}</h1>
+        <div className="tracker-container" style={{
+            backgroundColor: (isHovering) ? "rgba(51, 51, 51, 1)" : "rgba(51, 51, 51, 0.01)",
+            transition: "background-color 0.3s ease"
+        }}
+        onMouseEnter={() => setIsHovering(true)}
+        onMouseLeave={() => setIsHovering(false)}
+        >
+            <h1 className="tracker-title" style={{ opacity: (isHovering) ? 1 : 0, transition: "opacity 0.3s ease" }} >{grindspot?.data.name}</h1>
             <p className="tracker-timer">Timer: <span className="tracker-timer-time">{formatTime(timer)}</span></p>
             <div className="tracker-button-container">
-                <button onClick={() => {
+                <button style={{
+                    opacity: (isHovering) ? 1 : 0, transition: "opacity 0.3s ease" }} onClick={() => {
                     navigate(`/startup/${grindspotid}/${id}`);
                     setTimer(0);
                     setIsRunning(false)
                 }}>Back</button>
-                <button onClick={() => setIsRunning(prev => !prev)}>{(isRunning) ? "Stop" : "Start"}</button>
-                <button onClick={() => navigate(`/result/${grindspotid}/${id}/${timer}`)}>Finish</button>
+                <button style={{ opacity: (isHovering) ? 1 : 0, transition: "opacity 0.3s ease" }} onClick={() => setIsRunning(prev => !prev)}>{(isRunning) ? "Stop" : "Start"}</button>
+                <button style={{ opacity: (isHovering) ? 1 : 0, transition: "opacity 0.3s ease" }} onClick={() => navigate(`/result/${grindspotid}/${id}/${timer}`)}>Finish</button>
             </div>
         </div>
     );
