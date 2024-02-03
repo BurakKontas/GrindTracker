@@ -14,6 +14,7 @@ import Summary from "./Summary/Summary";
 import TimerSettings from "./TimerSettings/TimerSettings";
 import Settings from "./Settings/Settings";
 import GrindSpots from "./Grindspots/Grindspots";
+import GrindSpot from "./Grindspot/Grindspot";
 
 import 'primeflex/primeflex.css';
 import 'primereact/resources/primereact.css';
@@ -21,7 +22,7 @@ import 'primereact/resources/themes/md-dark-indigo/theme.css';
 import 'primeicons/primeicons.css';
 
 import "./App.css";
-import GrindSpot from "./Grindspot/Grindspot";
+import UpdateSettingsProvider from "../hooks/updateSettings";
 
 const MyRoutes = () => {
   return (
@@ -48,7 +49,9 @@ export function Providers({ children }: { children: React.ReactElement}) {
       <AuthProvider>
         <BdolyticsAPIProvider>
             <PrimeReactProvider>
-              {children}
+              <UpdateSettingsProvider>
+                {children}
+              </UpdateSettingsProvider>
             </PrimeReactProvider>
         </BdolyticsAPIProvider>
       </AuthProvider>

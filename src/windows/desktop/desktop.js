@@ -5,6 +5,7 @@ import "../../assets/css/title-bar.css";
 import { AppWindow } from "../../classes/AppWindow";
 import { kWindowNames } from "../../constants/consts";
 import { useRunningGame } from "overwolf-hooks";
+import { BackgroundController } from "../background/background";
 
 const Root = () => {
   useEffect(() => {

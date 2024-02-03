@@ -9,7 +9,7 @@ export const bdolyticsSlice = createAppSlice({
     name: "bdolytics",
     initialState,
     selectors: {
-        test: (state) => state.liste,
+        testSelector: (state) => state.liste,
     },
     
     reducers: (create) => ({
@@ -37,6 +37,7 @@ export const bdolyticsSlice = createAppSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { } = bdolyticsSlice.actions;
+export const { test } = bdolyticsSlice.actions;
+export const { testSelector } = bdolyticsSlice.selectors;
 
 export default bdolyticsSlice.reducer;

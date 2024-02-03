@@ -25,6 +25,8 @@ function Homepage() {
             console.log(response)
         }
         fetchGrindspots();
+        console.log(window)
+
     }, []);
 
     function GrindSpot({ grindspot }: { grindspot: Grindspot}) {

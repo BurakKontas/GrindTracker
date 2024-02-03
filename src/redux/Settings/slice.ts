@@ -53,6 +53,12 @@ export const settingsSlice = createAppSlice({
         setLanguage: create.reducer<BdolyticsLanguages>((state, action) => {
             state.language = action.payload;
         }),
+        updateStates: create.reducer<SettingsState>((state, action) => {
+            state.characters = action.payload.characters;
+            state.defaultCharacter = action.payload.defaultCharacter;
+            state.region = action.payload.region;
+            state.language = action.payload.language;
+        }),
         // fetchTodo: create.asyncThunk(
         //     async (id: string, thunkApi) => {
         //         // const res = await fetch(`myApi/todos?id=${id}`)
@@ -74,7 +80,7 @@ export const settingsSlice = createAppSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { addCharacter, removeCharacter, setDefaultCharacter, setRegion, setLanguage } = settingsSlice.actions;
+export const { addCharacter, removeCharacter, setDefaultCharacter, setRegion, setLanguage, updateStates } = settingsSlice.actions;
 export const { getDefaultCharacter, getCharacters, getRegion, getCharacter, getLanguage } = settingsSlice.selectors;
 
 export default settingsSlice.reducer;

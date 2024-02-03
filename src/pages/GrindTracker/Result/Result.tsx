@@ -2,16 +2,16 @@ import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { formatTime } from "../../../helpers/formatTime";
 
-import "./Result.css";
 import { BdolyticsGrindspotResponse } from "../../../types/Bdolytics/Grindspot";
 import { useBdolyticsAPI } from "../../../hooks/useBdolyticsApi";
+
+import "./Result.css";
 
 const Result = () => {
     const { grindspotid, id, timer } = useParams();
     const { getGrindspot } = useBdolyticsAPI();
     const [grindspot, setGrindspot] = React.useState<BdolyticsGrindspotResponse>();
     const navigate = useNavigate();
-
 
     React.useEffect(() => {
         getGrindspot(parseInt(grindspotid!)).then((response) => {

@@ -3,6 +3,7 @@ import windowCloseSVG from "../assets/img/window_close.svg";
 import windowMinimizeSVG from "../assets/img/window_minimize.svg";
 import windowHotkeySVG from "../assets/img/window_settings.svg";
 import { kWindowNames } from "../constants/consts";
+import { EventBus } from "./EventBus";
 // A base class for the app's foreground windows.
 // Sets the modal and drag behaviors, which are shared accross the desktop and in-game windows.
 export class AppWindow {
