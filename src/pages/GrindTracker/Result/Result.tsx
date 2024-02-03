@@ -10,7 +10,6 @@ const Result = () => {
     const { grindspotid, id, timer } = useParams();
     const { getGrindspot } = useBdolyticsAPI();
     const [grindspot, setGrindspot] = React.useState<BdolyticsGrindspotResponse>();
-    const [isRunning, setIsRunning] = React.useState(true);
     const navigate = useNavigate();
 
 
