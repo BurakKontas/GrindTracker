@@ -1,12 +1,8 @@
-import React, { useEffect } from "react";
-import { createContext, useContext, useState } from "react";
-import BdolyticsService from "../service/bdolytics";
+import React from "react";
+import { createContext, useContext } from "react";
 import { BdolyticsRegion } from "../types/Settings/RegionEnum";
-import { BdolyticsGrindspotsPagesEnum, BdolyticsGrindspotsResponse } from "../types/Bdolytics/Grindspots";
-import { BdolyticsItemResponse } from "../types/Bdolytics/Item";
-import { BdolyticsGrindspotResponse } from "../types/Bdolytics/Grindspot";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { getLanguage, getRegion, updateStates } from "../redux/Settings/slice";
+import { useAppDispatch } from "../redux/hooks";
+import { updateStates } from "../redux/Settings/slice";
 import { SettingsState } from "../redux/Settings/types";
 import { BdolyticsLanguages } from "../types/Settings/LanguageEnum";
 

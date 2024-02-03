@@ -3,10 +3,11 @@
 import storage from "redux-persist/lib/storage";
 import { PersistConfig } from 'redux-persist';
 import { SettingsState } from './Settings/types';
+import { ReportsState } from "./Reports/types";
 
 type PersistConfigsType = {
     settings: PersistConfig<SettingsState>,
-    bdolytics: PersistConfig<{ liste: string[] }>,
+    reports: PersistConfig<ReportsState>
 }
 
 const PersistConfigs: PersistConfigsType = {
@@ -15,10 +16,10 @@ const PersistConfigs: PersistConfigsType = {
         storage: storage,
         whitelist: ["characters", "defaultCharacter", "region", "language"],
     },
-    bdolytics: {
-        key: "bdolytics",
+    reports: {
+        key: "reports",
         storage: storage,
-        whitelist: ["liste"],
+        whitelist: ["reports"],
     }
 
 }

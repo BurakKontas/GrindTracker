@@ -23,6 +23,7 @@ import 'primeicons/primeicons.css';
 
 import "./App.css";
 import UpdateSettingsProvider from "../hooks/updateSettings";
+import UpdateReportsProvider from "../hooks/updateReports";
 
 const MyRoutes = () => {
   return (
@@ -50,7 +51,9 @@ export function Providers({ children }: { children: React.ReactElement}) {
         <BdolyticsAPIProvider>
             <PrimeReactProvider>
               <UpdateSettingsProvider>
-                {children}
+                <UpdateReportsProvider>
+                  {children}
+                </UpdateReportsProvider>
               </UpdateSettingsProvider>
             </PrimeReactProvider>
         </BdolyticsAPIProvider>
