@@ -122,8 +122,11 @@ const Startup = () => {
                 </LineChart>
             </div>
             <button 
-            onClick={() => navigate(`/tracker/${grindspotid}/${id}`)}
-            style={{ position:"absolute", bottom: 15, right:"47%" }} className="startup-button">Start</button>
+                onClick={() => navigate(`/tracker/${grindspotid}/${id}`)}
+                style={{ position:"absolute", bottom: 15, right:"47%" }} className="startup-button"
+            >
+                Start
+            </button>
         </div>
     )
 }

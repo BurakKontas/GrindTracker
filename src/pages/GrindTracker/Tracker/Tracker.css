@@ -2,7 +2,7 @@
     width: 400px;
     height: 200px;
     color: #fff;
-    /* background-color: #333; */
+    background-color: rgba(51, 51, 51, 0.01);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -14,6 +14,24 @@
 
 .tracker-container:hover {
     background-color: #333;
-    transition: background-color 0.3s ease, opacity 0.3s ease;
-    opacity: 0.9;
+    transition: background-color 0.3s ease;
+}
+
+.tracker-button-container {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.tracker-timer-time {
+    opacity: 1;
+}
+
+.tracker-button-container button {
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
