@@ -9,7 +9,13 @@ function Homepage() {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    console.log(window)
+    //@ts-ignore
+    window.overwolf.windows.onMessageReceived.addListener((message) => {
+      if(message.id === "result") {
+        navigate("/report", { state: message.content });
+      }
+    });
+    return () => window.removeEventListener("storage", () => {});
   }, [])
 
   return (

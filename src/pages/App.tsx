@@ -24,6 +24,7 @@ import 'primeicons/primeicons.css';
 import "./App.css";
 import UpdateSettingsProvider from "../hooks/updateSettings";
 import UpdateReportsProvider from "../hooks/updateReports";
+import Report from "./Report/Report";
 
 const MyRoutes = () => {
   return (
@@ -37,6 +38,7 @@ const MyRoutes = () => {
             <Route path="/grindspot/:id" element={<GrindSpot />} />
             <Route path="/timersettings" element={<TimerSettings />} />
             <Route path="/settings" element={<Settings />} />
+            <Route path="/report" element={<Report />} />
           </Routes>
         </Layout>
       </div>

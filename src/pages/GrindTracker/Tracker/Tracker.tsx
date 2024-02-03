@@ -37,6 +37,22 @@ const Tracker = () => {
         return () => clearInterval(interval);
     }, [isRunning]); 
 
+    function finish() {
+        // window.overwolf.windows.getWindow("app_window", (result) => {
+        //@ts-ignore
+        window.overwolf.windows.getWindow("desktop", (result) => {
+            //@ts-ignore
+            window.overwolf.windows.sendMessage(result.window.id, "result", { grindspotid, id, time: timer }, function (response) {
+                //@ts-ignore
+                window.overwolf.windows.getCurrentWindow((result) => {
+                    //@ts-ignore
+                    window.overwolf.windows.close(result.window.id);
+                });
+            });
+        });
+
+    }
+
     return (
         <div className="tracker-container" style={{
             backgroundColor: (isHovering) ? "rgba(51, 51, 51, 1)" : "rgba(51, 51, 51, 0.01)",
@@ -55,7 +71,7 @@ const Tracker = () => {
                     setIsRunning(false)
                 }}>Back</button>
                 <button style={{ opacity: (isHovering) ? 1 : 0, transition: "opacity 0.3s ease" }} onClick={() => setIsRunning(prev => !prev)}>{(isRunning) ? "Stop" : "Start"}</button>
-                <button style={{ opacity: (isHovering) ? 1 : 0, transition: "opacity 0.3s ease" }} onClick={() => navigate(`/result/${grindspotid}/${id}/${timer}`)}>Finish</button>
+                <button style={{ opacity: (isHovering) ? 1 : 0, transition: "opacity 0.3s ease" }} onClick={finish}>Finish</button>
             </div>
         </div>
     );
