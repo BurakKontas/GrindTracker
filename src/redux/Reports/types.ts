@@ -1,5 +1,11 @@
 export interface ReportsState {
     reports : Report[];
+    reporting: Boolean
+    reportProps: {
+        id: string;
+        grindspotId: number;
+        time: number;
+    }
 }
 
 export interface Report {

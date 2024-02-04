@@ -15,6 +15,9 @@ import TimerSettings from "./TimerSettings/TimerSettings";
 import Settings from "./Settings/Settings";
 import GrindSpots from "./Grindspots/Grindspots";
 import GrindSpot from "./Grindspot/Grindspot";
+import UpdateSettingsProvider from "../hooks/updateSettings";
+import UpdateReportsProvider from "../hooks/updateReports";
+import Report from "./Report/Report";
 
 import 'primeflex/primeflex.css';
 import 'primereact/resources/primereact.css';
@@ -22,9 +25,6 @@ import 'primereact/resources/themes/md-dark-indigo/theme.css';
 import 'primeicons/primeicons.css';
 
 import "./App.css";
-import UpdateSettingsProvider from "../hooks/updateSettings";
-import UpdateReportsProvider from "../hooks/updateReports";
-import Report from "./Report/Report";
 
 const MyRoutes = () => {
   return (

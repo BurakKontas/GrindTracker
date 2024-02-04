@@ -88,7 +88,7 @@
         "transparent": true,
         "resizable": false,
         "keep_window_location": true,
-        "in_game_only": false,
+        "in_game_only": true,
         "block_top_window_navigation": true,
         "popup_blocker": true,
         "native_window": true,

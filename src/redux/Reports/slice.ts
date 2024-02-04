@@ -3,12 +3,26 @@ import { Report, ReportsState } from "./types";
 
 const initialState: ReportsState = {
     reports: [],
+    // reporting: false,
+    // reportProps: {
+    //     id: "",
+    //     grindspotId: 0,
+    //     time: 0,
+    // }
+    reporting: true,
+    reportProps: {
+        id: "5b022425-b0e6-4872-b485-00b7432544c5",
+        grindspotId: 71,
+        time: 3642,
+    }
 };
 
 export const reportsSlice = createAppSlice({
     name: "reports",
     initialState,
     selectors: {
+        isReporting: (state) => state.reporting,
+        getReportProps: (state) => state.reportProps,
         getReports: (state) => state.reports,
         getReport: (state, id: string) => state.reports.find((r) => r.id === id),
         getReportByDate: (state, date: Date) => state.reports.filter((r) => r.date === date),
@@ -21,7 +35,7 @@ export const reportsSlice = createAppSlice({
         getReportsByGrindspotAndCharacterAndDateRange: (state, grindspotId: number, characterName: string, start: Date, end: Date) => state.reports.filter((r) => r.grindspotId === grindspotId && r.characterName === characterName && r.date >= start && r.date <= end),
     },
     reducers: (create) => ({
-        updateStates: create.reducer<ReportsState>((state, action) => {
+        updateStates: create.reducer<Omit<ReportsState, "reporting" | "reportProps">>((state, action) => {
             state.reports = action.payload.reports;
         }),
         addReport: create.reducer<Report>((state, action) => {
@@ -35,11 +49,17 @@ export const reportsSlice = createAppSlice({
             if (index === -1) throw new Error("Report does not exist");
             state.reports[index] = action.payload;
         }),
+        updateReporting: create.reducer<boolean>((state, action) => {
+            state.reporting = action.payload;
+        }),
+        updateReportProps: create.reducer<ReportsState["reportProps"]>((state, action) => {
+            state.reportProps = action.payload;
+        }),
     }),
 });
 
 // Action creators are generated for each case reducer function
-export const { updateStates, addReport, removeReport, updateReport } = reportsSlice.actions;
-export const { getReport, getReports, getReportByCharacter, getReportByDate, getReportByGrindspot, getReportsByCharacterAndDateRange, getReportsByDateRange, getReportsByGrindspotAndCharacter, getReportsByGrindspotAndCharacterAndDateRange, getReportsByGrindspotAndDateRange } = reportsSlice.selectors;
+export const { updateStates, addReport, removeReport, updateReport, updateReporting, updateReportProps } = reportsSlice.actions;
+export const { isReporting, getReportProps, getReport, getReports, getReportByCharacter, getReportByDate, getReportByGrindspot, getReportsByCharacterAndDateRange, getReportsByDateRange, getReportsByGrindspotAndCharacter, getReportsByGrindspotAndCharacterAndDateRange, getReportsByGrindspotAndDateRange } = reportsSlice.selectors;
 
 export default reportsSlice.reducer;

@@ -31,7 +31,7 @@ const UpdateReportsProvider: React.FC<UpdateReportsProviderPropsType> = (props) 
 
             const reportsJson = e.newValue! || "{}";
             const reports = JSON.parse(reportsJson);
-            const reportsState: ReportsState = {
+            const reportsState: Omit<ReportsState, "reporting" | "reportProps"> = {
                 reports: JSON.parse(reports)
             };
             dispatch(updateStates(reportsState))

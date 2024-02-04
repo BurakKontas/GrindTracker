@@ -3,6 +3,9 @@ import "./slidemenu.css";
 
 import { MenuItemsPropsType, MenuItems, UtilityMenuItems } from "./menuitems";
 import { useNavigate } from "react-router-dom";
+import { useAppSelector } from "../../redux/hooks";
+import { isReporting } from "../../redux/Reports/slice";
+import { ReportImage } from "../../constants/base64images";
 
 type MenuItemPropsType = {
     Item: MenuItemsPropsType;
@@ -26,6 +29,7 @@ const MenuItem: React.FC<MenuItemPropsType> = (props) => {
 
 const SlideMenu: React.FC = () => {
     const [selectedItem, setSelectedItem] = React.useState(MenuItems[0].name);
+    const isReport = useAppSelector(isReporting)
     const navigate = useNavigate();
 
     const handleClick = (name: string, item: MenuItemsPropsType) => {
@@ -44,6 +48,20 @@ const SlideMenu: React.FC = () => {
                         handleClick={() => handleClick(item.name, item)}
                     />
                 ))}
+                {isReport && <MenuItem
+                    key={"reporting"}
+                    Item={{
+                        Icon: <ReportImage />,
+                        name: "Report",
+                        path: "/report",
+                    }}
+                    isSelected={selectedItem == "Report"}
+                    handleClick={() => handleClick("Report", {
+                        Icon: <ReportImage />,
+                        name: "Report",
+                        path: "/report",
+                    })}
+                />}
             </div>
             <div className="slide-menu-utilities">
                 {UtilityMenuItems.map((item, index) => (

@@ -38,9 +38,9 @@ const Tracker = () => {
     }, [isRunning]); 
 
     function finish() {
-        // window.overwolf.windows.getWindow("app_window", (result) => {
         //@ts-ignore
-        window.overwolf.windows.getWindow("desktop", (result) => {
+        // window.overwolf.windows.getWindow("desktop", (result) => {
+        window.overwolf.windows.getWindow("app_window", (result) => {
             //@ts-ignore
             window.overwolf.windows.sendMessage(result.window.id, "result", { grindspotid, id, time: timer }, function (response) {
                 //@ts-ignore
