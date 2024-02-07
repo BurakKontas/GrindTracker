@@ -2,7 +2,7 @@ import React from "react";
 import "./slidemenu.css";
 
 import { MenuItemsPropsType, MenuItems, UtilityMenuItems } from "./menuitems";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../redux/hooks";
 import { isReporting } from "../../redux/Reports/slice";
 import { ReportImage } from "../../constants/base64images";
@@ -28,13 +28,12 @@ const MenuItem: React.FC<MenuItemPropsType> = (props) => {
 
 
 const SlideMenu: React.FC = () => {
-    const [selectedItem, setSelectedItem] = React.useState(MenuItems[0].name);
     const isReport = useAppSelector(isReporting)
     const navigate = useNavigate();
+    const location = useLocation();
 
-    const handleClick = (name: string, item: MenuItemsPropsType) => {
-        setSelectedItem(name);
-        navigate(item.path);
+    const handleClick = (path: string) => {
+        navigate(path);
     }
 
     return (
@@ -44,23 +43,19 @@ const SlideMenu: React.FC = () => {
                     <MenuItem
                         key={index}
                         Item={item}
-                        isSelected={selectedItem == item.name}
-                        handleClick={() => handleClick(item.name, item)}
+                        isSelected={location.pathname == item.path}
+                        handleClick={() => handleClick(item.path)}
                     />
                 ))}
                 {isReport && <MenuItem
-                    key={"reporting"}
+                    key={"report"}
                     Item={{
                         Icon: <ReportImage />,
                         name: "Report",
                         path: "/report",
                     }}
-                    isSelected={selectedItem == "Report"}
-                    handleClick={() => handleClick("Report", {
-                        Icon: <ReportImage />,
-                        name: "Report",
-                        path: "/report",
-                    })}
+                    isSelected={location.pathname == "/report"}
+                    handleClick={() => handleClick("/report")}
                 />}
             </div>
             <div className="slide-menu-utilities">
@@ -68,8 +63,8 @@ const SlideMenu: React.FC = () => {
                     <MenuItem
                         key={index}
                         Item={item}
-                        isSelected={selectedItem == item.name}
-                        handleClick={() => handleClick(item.name, item)}
+                        isSelected={location.pathname == item.path}
+                        handleClick={() => handleClick(item.path)}
                     />
                 ))}
             </div>

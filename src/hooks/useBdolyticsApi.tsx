@@ -7,6 +7,8 @@ import { BdolyticsItemResponse } from "../types/Bdolytics/Item";
 import { BdolyticsGrindspotResponse } from "../types/Bdolytics/Grindspot";
 import { useAppSelector } from "../redux/hooks";
 import { getLanguage, getRegion } from "../redux/Settings/slice";
+import { MarketDataItem } from "../types/Bdolytics/MarketData";
+import { useCookies } from 'react-cookie';
 
 export const BdolyticsAPIContext = createContext<BdolyticsAPIProviderValueType>({
     //default values
@@ -14,7 +16,8 @@ export const BdolyticsAPIContext = createContext<BdolyticsAPIProviderValueType>(
     getGrindspot: (id: number | string) => undefined!,
     getItem: (id: number | string) => undefined!,
     getItems: (ids: number[] | string[]) => undefined!,
-    getImage: (image: string) => undefined!
+    getImage: (image: string) => undefined!,
+    getMarketPricesData: (id: number | string) => undefined!
 })
 
 export const useBdolyticsAPI = () => {
@@ -28,6 +31,7 @@ export const useBdolyticsAPI = () => {
     if (!context.getImage) console.warn("useBdolyticsAPI.getImage not implemented");
     if (!context.getItem) console.warn("useBdolyticsAPI.getItem not implemented");
     if (!context.getItems) console.warn("useBdolyticsAPI.getItems not implemented");
+    if (!context.getMarketPricesData) console.warn("useBdolyticsAPI.getMarketPricesData not implemented");
 
     return context;
 };
@@ -41,6 +45,7 @@ export type BdolyticsAPIProviderValueType = {
     getItem: (id: number | string) => Promise<BdolyticsItemResponse | undefined>
     getItems: (ids: number[] | string[]) => Promise<BdolyticsItemResponse[] | undefined>
     getImage: (image: string) => Promise<string | undefined>
+    getMarketPricesData: (id: number | string) => Promise<number | undefined>
 }
 
 const BdolyticsAPIProvider: React.FC<BdolyticsAPIProviderPropsType> = (props) => {
@@ -76,9 +81,17 @@ const BdolyticsAPIProvider: React.FC<BdolyticsAPIProviderPropsType> = (props) =>
         return await bdolyticsService.getImage(image);
     }
 
+    const getMarketPricesData = async (id: number | string): Promise<number | undefined> => {
+        let response = await bdolyticsService.getMarketPriceOfItems();
+        let data = response.data;
+        let item = data.find((item) => item.id === parseInt(id.toString()));
+        if (item) return item.price;
+        let itemData = await getItem(id);
+        return itemData.data.sell_price;
+    }
 
     return (
-        <BdolyticsAPIContext.Provider value={{ getGrindspots, getGrindspot, getItem, getItems, getImage }}>
+        <BdolyticsAPIContext.Provider value={{ getGrindspots, getGrindspot, getItem, getItems, getImage, getMarketPricesData }}>
             {props.children}
         </BdolyticsAPIContext.Provider>
     )

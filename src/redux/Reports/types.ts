@@ -23,7 +23,7 @@ export interface Item {
     id: number;
     itemName: string;
     itemImage: string;
-    itemGrade: string;
+    itemGrade: number;
     amount: number;
     perSilver: number;
 }

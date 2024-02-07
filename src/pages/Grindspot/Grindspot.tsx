@@ -15,7 +15,7 @@ import { BdolyticsTooltipTypes } from "../../types/Bdolytics/TooltipTypes";
 
 import "./Grindspot.css";
 
-function DropItemText({ name, grade }: { name: string, grade: number }) {
+export function DropItemText({ name, grade }: { name: string, grade: number }) {
     return (
         <div className="grindspot-right-item-text" style={{
             color: GradeTypes[`Grade${grade}` as keyof typeof GradeTypes]
@@ -30,19 +30,11 @@ function GrindSpot() {
     const [grindspot, setGrindspot] = React.useState<BdolyticsGrindspotResponse>();
     const { getGrindspot } = useBdolyticsAPI()
     const navigate = useNavigate()
-    const [data, setData] = React.useState<GrindHeaderData>({
-        name: "",
-        image: ""
-    });
 
     React.useEffect(() => {
         async function init() {
             let response = await getGrindspot(id!)
             setGrindspot(response)
-            setData({
-                name: response!.data.name,
-                image: response!.data.icon_image
-            })
         }
         init()
     }, [])
@@ -61,8 +53,8 @@ function GrindSpot() {
     function GrindHeaderInlineElements() {
         return (
             <>
-                <p>Recommended AP: {grindspot?.data.ap}</p>
-                <p>Recommended DP: {grindspot?.data.dp}</p>
+                <span>Recommended AP: {grindspot?.data.ap}</span>
+                <span>Recommended DP: {grindspot?.data.dp}</span>
             </>
         )
     }
@@ -75,26 +67,30 @@ function GrindSpot() {
                 }}>
                     Back
                 </button>
-                <GrindHeader data={data} 
-                inlineElements={<GrindHeaderInlineElements />}
-                style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    height: "97%",
-                    borderRight: "1px solid #444",
-                    paddingRight: 40
-                }} 
-                imageStyle={{
-                    width: 100,
-                    height: 100,
-                    marginBottom: 10
+                <GrindHeader data={{
+                    image: grindspot?.data.icon_image!,
+                    name: grindspot?.data.name!,
                 }}
-                titleStyle={{
-                    fontSize: 20,
-                    fontWeight: "bold"
-                }}
+                    inlineElements={<GrindHeaderInlineElements />}
+                    style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        height: "97%",
+                        borderRight: "1px solid #444",
+                        paddingRight: 40
+                    }}
+                    imageStyle={{
+                        width: 100,
+                        height: 100,
+                        marginBottom: 10
+                    }}
+                    titleStyle={{
+                        fontSize: 20,
+                        fontWeight: "bold",
+                        marginBottom: 10
+                    }}
                 />
             </div>
             <div className="grindspot-right">

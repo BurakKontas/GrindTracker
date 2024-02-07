@@ -1,4 +1,4 @@
-interface Item {
+export interface Item {
     id: number;
     sub_id: number;
     name: string;

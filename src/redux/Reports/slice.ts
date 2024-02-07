@@ -3,17 +3,11 @@ import { Report, ReportsState } from "./types";
 
 const initialState: ReportsState = {
     reports: [],
-    // reporting: false,
-    // reportProps: {
-    //     id: "",
-    //     grindspotId: 0,
-    //     time: 0,
-    // }
-    reporting: true,
+    reporting: false,
     reportProps: {
-        id: "5b022425-b0e6-4872-b485-00b7432544c5",
-        grindspotId: 71,
-        time: 3642,
+        id: "",
+        grindspotId: 0,
+        time: 0,
     }
 };
 
@@ -40,6 +34,7 @@ export const reportsSlice = createAppSlice({
         }),
         addReport: create.reducer<Report>((state, action) => {
             state.reports.push(action.payload);
+            console.log("Report added", action.payload)
         }),
         removeReport: create.reducer<string>((state, action) => {
             state.reports = state.reports.filter((r) => r.id !== action.payload);

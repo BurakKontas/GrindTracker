@@ -48,6 +48,8 @@ const Tracker = () => {
                     //@ts-ignore
                     window.overwolf.windows.close(result.window.id);
                 });
+                //@ts-ignore
+                window.overwolf.windows.restore(result.window.id);
             });
         });
 
