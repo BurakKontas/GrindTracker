@@ -22,7 +22,7 @@ export const reportsSlice = createAppSlice({
         getReport: (state, id: string) => state.reports.find((r) => r.id === id),
         getReportCount: (state) => state.reports.length,
         getReportByDate: (state, date: Date) => state.reports.filter((r) => new Date(r.date) === date),
-        getReportByGrindspot: (state, grindspotId: number) => state.reports.filter((r) => r.grindspotId === grindspotId),
+        getReportByGrindspot: (state, grindspotId: number) => [...state.reports].reverse().filter((r) => r.grindspotId == grindspotId),
         getReportByCharacter: (state, characterName: string) => state.reports.filter((r) => r.characterName === characterName),
         getReportsByDateRange: (state, start: Date, end: Date) => state.reports.filter((r) => new Date(r.date) >= start && new Date(r.date) <= end),
         getReportsByGrindspotAndDateRange: (state, grindspotId: number, start: Date, end: Date) => state.reports.filter((r) => r.grindspotId === grindspotId && new Date(r.date) >= start && new Date(r.date) <= end),

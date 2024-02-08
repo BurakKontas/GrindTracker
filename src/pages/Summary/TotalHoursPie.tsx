@@ -6,11 +6,13 @@ import { colors } from "../../helpers/colors";
 import { Pie } from "react-chartjs-2";
 import { Chart, registerables } from 'chart.js';
 import { replaceAll } from "../../helpers/replaceAll";
+import { useNavigate } from "react-router-dom";
 
 Chart.register(...registerables);
 
 function TotalHoursPie() {
     const totalHoursByZones = useAppSelector(getTotalHoursByZones);
+    const navigate = useNavigate();
     const totalSecondsTotal = Object.values(totalHoursByZones).reduce((acc, data) => acc += data.totalSeconds, 0);
     const totalHoursPieData = Object.keys(totalHoursByZones).map((key) => {
         const data = totalHoursByZones[key];
@@ -48,7 +50,7 @@ function TotalHoursPie() {
                             const clickedElementIndex = elements[0].index;
                             const clickedElementData = totalHoursPieData[clickedElementIndex];
                             // İşlem yapılacak fonksiyonu burada çağır
-                            console.log(clickedElementData)
+                            navigate(`/brief/${clickedElementData.info.grindspotId}`)
                         }
                     },
                     plugins: {

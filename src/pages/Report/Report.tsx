@@ -8,7 +8,6 @@ import { addReport, getReportProps, isReporting, updateReporting } from "../../r
 import { formatTime } from "../../helpers/formatTime";
 import { GrindHeader } from "../../components/grindheader/GrindHeader";
 
-import "./Report.css";
 import { getDefaultCharacter, getRegion } from "../../redux/Settings/slice";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
@@ -16,6 +15,8 @@ import { DropItem } from "../../components/dropitem/DropItem";
 import { BdolyticsTooltipTypes } from "../../types/Bdolytics/TooltipTypes";
 import { DropItemText } from "../Grindspot/Grindspot";
 import { formatValueToK } from "../../helpers/formatValueToK";
+
+import "./Report.css";
 
 interface DataTableDataItem {
     item: Item;

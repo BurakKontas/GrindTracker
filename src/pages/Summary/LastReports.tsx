@@ -7,9 +7,12 @@ import { formatTime } from "../../helpers/formatTime";
 import { formatDate } from "../../helpers/formatDate";
 import { formatValueToK } from "../../helpers/formatValueToK";
 import { Dialog } from 'primereact/dialog';
-import { Report } from "../../redux/Reports/types";
+import { Item, Report } from "../../redux/Reports/types";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { DropItem } from "../../components/dropitem/DropItem";
+import { BdolyticsTooltipTypes } from "../../types/Bdolytics/TooltipTypes";
+import { DropItemText } from "../Grindspot/Grindspot";
 
 function LastReports() {
     const navigate = useNavigate();
@@ -21,7 +24,8 @@ function LastReports() {
     const [grindspotOptions, setGrindspotOptions] = useState<JSX.Element[]>([]);
     const [selectedReport, setSelectedReport] = useState<Report | null>(null);
     const [displayDeleteDialog, setDisplayDeleteDialog] = useState<boolean>(false);
-
+    const [expandedRows, setExpandedRows] = useState(null);
+    
     useEffect(() => {
         setReports(allReports);
     }, [allReports]);
@@ -61,6 +65,45 @@ function LastReports() {
         setGrindspotOptions(grindspotOptions);
     }, [reports]);
 
+    const rowExpansionTemplate = (data: Report) => {
+        console.log(data)
+        return (
+            <div>
+                <DataTable value={data.items} className="p-datatable-striped">
+                    <Column field="name" header="Item Name" body={(data: Item, options) => {
+                        return (
+                            <div>
+                                <DropItem
+                                    type={BdolyticsTooltipTypes.ITEM}
+                                    drop={{
+                                        id: data.id,
+                                        name: data.itemName,
+                                        image: data.itemImage,
+                                        grade_type: data.itemGrade
+                                    }}
+                                    containerStyle={{
+                                        height: 40,
+                                        display: "flex",
+                                        flexDirection: "row",
+                                        alignItems: "center",
+                                        paddingLeft: 10,
+                                        textDecoration: "none"
+                                    }}
+                                    inlineElement={<DropItemText name={data.itemName} grade={data.itemGrade} />}
+                                />
+                            </div>
+                        )
+                    }}></Column>
+                    <Column field="amount" header="Amount" body={(data, options) => {
+                        return data.amount
+                    }}></Column>
+                    <Column field="perSilver" header="Silver Per Item"></Column>
+                </DataTable>
+            </div>
+        );
+    };
+
+
 
     const header = (
         <div>
@@ -92,11 +135,22 @@ function LastReports() {
         }
         return true;
     });
+
     
     return (
         <div>
-            <DataTable value={filteredReports} className="p-datatable-striped"
-                header={header} emptyMessage="No records found">
+            <DataTable 
+                value={filteredReports} 
+                className="p-datatable-striped" 
+                header={header} 
+                emptyMessage="No records found"
+                //@ts-ignore
+                expandedRows={expandedRows} 
+                //@ts-ignore
+                onRowToggle={(e) => setExpandedRows(e.data)}
+                rowExpansionTemplate={rowExpansionTemplate}
+            >
+                <Column expander style={{ width: '3em' }} />
                 { /* @ts-ignore */}
                 <Column field="date" header="Date" sortable body={(data, options) => {
                     return formatDate(data.date)
@@ -112,9 +166,6 @@ function LastReports() {
                 { /* @ts-ignore */}
                 <Column field="seconds" header="Time (Hours)" sortable body={(data, options) => {
                     return formatTime(data.seconds);
-                }}></Column>
-                <Column field="details" header="Details" body={(data, options) => {
-                    return <button className="settings-tab-ays yes" onClick={() => onDetailsButtonClick(data)}>Details</button>
                 }}></Column>
                 <Column field="delete" header="Delete" body={(data, options) => {
                     return <button className="settings-tab-ays no" onClick={() => onDeleteButtonClick(data)}>Delete</button>

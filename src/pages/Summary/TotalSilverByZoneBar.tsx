@@ -5,6 +5,7 @@ import { getReportsByGrindzones } from "../../redux/Reports/slice";
 import { colors } from "../../helpers/colors";
 import { replaceAll } from "../../helpers/replaceAll";
 import { formatValueToK } from "../../helpers/formatValueToK";
+import { useNavigate } from "react-router-dom";
 
 export const truncateLabel = (label: string | number, maxChars: number) => {
     if (typeof label === 'number') return label;
@@ -13,7 +14,7 @@ export const truncateLabel = (label: string | number, maxChars: number) => {
 
 function TotalSilverByZoneBar() {
     const reports = useAppSelector(getReportsByGrindzones);
-
+    const navigate = useNavigate();
     return (
         <>
             <div className="summary-chart-title">
@@ -42,12 +43,11 @@ function TotalSilverByZoneBar() {
                 options={{
                     onClick: function (event, elements) {
                         if (elements && elements.length > 0) {
-                            // Tıklanan öğeyi işle
                             const clickedElementIndex = elements[0].index;
                             const clickedElementData = Object.values(reports)[clickedElementIndex];
-                            // İşlem yapılacak fonksiyonu burada çağır
-                            console.log(clickedElementData)
-                        }
+                            let id = clickedElementData[0].grindspotId
+                            navigate(`/brief/${id}`)
+                    }
                     },
                     indexAxis: 'y',
                     scales: {
