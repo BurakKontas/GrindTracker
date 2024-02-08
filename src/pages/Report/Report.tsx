@@ -15,26 +15,7 @@ import { Column } from "primereact/column";
 import { DropItem } from "../../components/dropitem/DropItem";
 import { BdolyticsTooltipTypes } from "../../types/Bdolytics/TooltipTypes";
 import { DropItemText } from "../Grindspot/Grindspot";
-
-const formatValueToK = (value: number) => {
-    const suffixes = ['', 'K', 'M', 'B', 'T']; // Sırasıyla: birim, bin, milyon, milyar, trilyon
-    let suffixIndex = 0;
-
-    while (value >= 1000) {
-        value /= 1000;
-        suffixIndex++;
-    }
-
-    // Değerin virgülden sonraki kısmı 3 basamaktan fazlaysa, sadece ilk 3 basamağı alıyoruz.
-    const formattedValue = value.toFixed(2);
-    const [integerPart, decimalPart] = formattedValue.split('.');
-
-    // Virgülden sonraki kısmı alıyoruz ve tam olarak üç basamağı alıyoruz.
-    const truncatedDecimal = decimalPart?.slice(0, 3).padEnd(3, '0') || '';
-
-    // Biçimlendirilmiş sayıyı ve birimi döndürüyoruz.
-    return `${integerPart}.${truncatedDecimal}${suffixes[suffixIndex]}`;
-};
+import { formatValueToK } from "../../helpers/formatValueToK";
 
 interface DataTableDataItem {
     item: Item;
@@ -90,7 +71,7 @@ function Report() {
         dispatch(addReport({
             grindspotId: report.grindspotId,
             seconds: report.time,
-            date: new Date(),
+            date: new Date().toISOString(),
             grindspotName: grindspot!.data.name,
             id: report.id,
             totalSilver: dataTableData.reduce((acc, item) => {

@@ -8,9 +8,11 @@ import { BdolyticsGrindspotResponse } from "../../../types/Bdolytics/Grindspot";
 import { useBdolyticsAPI } from "../../../hooks/useBdolyticsApi";
 import { DropItem } from "../../../components/dropitem/DropItem";
 import { BdolyticsTooltipTypes } from "../../../types/Bdolytics/TooltipTypes";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Line } from "react-chartjs-2";
+import { Chart, registerables } from 'chart.js';
 
-import { LineChart, Tooltip, Line, YAxis } from 'recharts';
-
+Chart.register(...registerables);
 
 const generateRandomDate = () => {
     const start = new Date(2022, 0, 1); // 2022-01-01
@@ -45,11 +47,6 @@ const formatValue = (value: number) => {
     return `${value.toFixed(1)}${suffixes[suffixIndex]}`;
 };
 
-const tooltipFormatter = (value: number) => {
-    const formattedValue = value.toLocaleString(); // Değeri okunabilir formata dönüştür
-    return `${formattedValue} Silver`;
-};
-
 const Startup = () => {
     const { grindspotid, id } = useParams();
     const { getGrindspot, getImage } = useBdolyticsAPI();
@@ -69,6 +66,7 @@ const Startup = () => {
 
     React.useEffect(() => {
         const fetchImage = async () => {
+            if (!grindspot) return;
             const cachedImage = sessionStorage.getItem(`image_${grindspot?.data.icon_image}`);
             if (cachedImage) {
                 setImage(cachedImage);
@@ -82,6 +80,7 @@ const Startup = () => {
 
         fetchImage();
     }, [grindspot]);
+
 
     if(!grindspot) return <div>Loading...</div>
     return (
@@ -115,11 +114,39 @@ const Startup = () => {
                 })}
             </div>
             <div style={{ display:"flex", justifyContent:"center", alignItems:"center" }}>
-                <LineChart width={375} height={180} data={data.slice(-30)}>
-                    <YAxis tickFormatter={formatValue} />
-                    <Tooltip formatter={tooltipFormatter} />
-                    <Line type="monotone" dataKey="value" stroke="#8884d8" />
-                </LineChart>
+                <Line
+                    style={{ width: "50vw", height: "50vh" }}
+                    data={{
+                        labels: data.slice(-30).map(item => item.date), // Son 30 veri etiketlerini alır
+                        datasets: [
+                            {
+                                label: 'Value',
+                                data: data.slice(-30).map(item => item.value), // Son 30 veri değerlerini alır
+                                borderColor: '#8884d8', // Çizgi rengi
+                                fill: false // Alan doldurmayı devre dışı bırakır
+                            }
+                        ]
+                    }}
+                    options={{
+                        scales: {
+                            y: {
+                                ticks: {
+                                    callback: (value) => formatValue(parseInt(value as string)) // Eksen değerlerini okunabilir formata dönüştür
+                                }
+                            },
+                        },
+                        plugins: {
+                            tooltip: {
+                                callbacks: {
+                                    label: (tooltipItem) => `${tooltipItem.formattedValue} Silver` // Tooltip'deki değeri kullan
+                                }
+                            },
+                            legend: {
+                                display: false // Açıklamayı gizle
+                            }
+                        }
+                    }}
+                />
             </div>
             <button 
                 onClick={() => navigate(`/tracker/${grindspotid}/${id}`)}

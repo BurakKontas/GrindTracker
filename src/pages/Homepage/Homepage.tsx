@@ -10,11 +10,13 @@ function Homepage() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   React.useEffect(() => {
+    navigate("/summary")
     //@ts-ignore
     window.overwolf.windows.onMessageReceived.addListener((message) => {
       if(message.id === "result") {
+        console.log(message.content);
         dispatch(updateReportProps({
-          grindspotId: message.content.grindspotId,
+          grindspotId: message.content.grindspotid,
           time: message.content.time,
           id: message.content.id
         }))

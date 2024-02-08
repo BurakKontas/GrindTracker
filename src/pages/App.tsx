@@ -18,6 +18,7 @@ import GrindSpot from "./Grindspot/Grindspot";
 import UpdateSettingsProvider from "../hooks/updateSettings";
 import UpdateReportsProvider from "../hooks/updateReports";
 import Report from "./Report/Report";
+import ReportDetails from "./ReportDetails/ReportDetails";
 
 import 'primeflex/primeflex.css';
 import 'primereact/resources/primereact.css';
@@ -39,6 +40,7 @@ const MyRoutes = () => {
             <Route path="/timersettings" element={<TimerSettings />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/report" element={<Report />} />
+            <Route path="/report/:id" element={<ReportDetails />} />
           </Routes>
         </Layout>
       </div>

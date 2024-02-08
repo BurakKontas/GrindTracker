@@ -14,7 +14,7 @@ export interface Report {
     grindspotName: string;
     characterName: string;
     seconds: number;
-    date: Date;
+    date: string;
     totalSilver: number;
     items: Item[];
 }

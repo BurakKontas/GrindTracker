@@ -62,11 +62,13 @@ const BdolyticsAPIProvider: React.FC<BdolyticsAPIProviderPropsType> = (props) =>
     };
 
     const getGrindspot = async (id: number | string): Promise<BdolyticsGrindspotResponse> => {
-        return await bdolyticsService.getGrindspot(parseInt(id.toString()));
+        if(typeof id === "string") id = parseInt(id);
+        return await bdolyticsService.getGrindspot(id);
     }
 
     const getItem = async (id: number | string): Promise<BdolyticsItemResponse> => {
-        return await bdolyticsService.getItem(parseInt(id.toString()));
+        if (typeof id === "string") id = parseInt(id);
+        return await bdolyticsService.getItem(id);
     }
 
     const getItems = async (ids: number[] | string[]): Promise<BdolyticsItemResponse[]> => {
@@ -82,9 +84,10 @@ const BdolyticsAPIProvider: React.FC<BdolyticsAPIProviderPropsType> = (props) =>
     }
 
     const getMarketPricesData = async (id: number | string): Promise<number | undefined> => {
+        if (typeof id === "string") id = parseInt(id);
         let response = await bdolyticsService.getMarketPriceOfItems();
         let data = response.data;
-        let item = data.find((item) => item.id === parseInt(id.toString()));
+        let item = data.find((item) => item.id === id);
         if (item) return item.price;
         let itemData = await getItem(id);
         return itemData.data.sell_price;
