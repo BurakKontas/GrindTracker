@@ -149,6 +149,9 @@ function LastReports() {
                 //@ts-ignore
                 onRowToggle={(e) => setExpandedRows(e.data)}
                 rowExpansionTemplate={rowExpansionTemplate}
+                style={{
+                    paddingRight: 20
+                }}
             >
                 <Column expander style={{ width: '3em' }} />
                 { /* @ts-ignore */}
@@ -162,6 +165,10 @@ function LastReports() {
                 { /* @ts-ignore */}
                 <Column field="totalSilver" header="Total Silver" sortable body={(data, options) => {
                     return formatValueToK(data.totalSilver);
+                }}></Column>
+                <Column field="totalSilverByHour" header="Total Silver By Hour" body={(data, options) => {
+                    const totalSilverByHour = data.totalSilver / (data.seconds / 3600);
+                    return formatValueToK(totalSilverByHour);
                 }}></Column>
                 { /* @ts-ignore */}
                 <Column field="seconds" header="Time (Hours)" sortable body={(data, options) => {
