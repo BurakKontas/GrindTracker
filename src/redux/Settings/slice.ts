@@ -27,6 +27,7 @@ export const settingsSlice = createAppSlice({
     },
     reducers: (create) => ({
         addCharacter: create.reducer<SettingsCharacter>((state, action) => {
+            if(action.payload.name === "") action.payload.name = "No Name"
             if(state.characters.find((c) => c.name === action.payload.name)) 
                 throw new Error("Character already exists");
             

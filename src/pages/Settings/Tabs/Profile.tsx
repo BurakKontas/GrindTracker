@@ -68,7 +68,7 @@ function ProfileTab() {
                     <label>Default Character:</label>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                         {characters.length > 0 ? (
-                            <select style={{ marginLeft: 10, paddingRight: 100 }} value={defaultCharacter!.name} onChange={(e) => dispatch(setDefaultCharacter(e.target.value))}>
+                            <select style={{ marginLeft: 10, paddingRight: 76 }} value={defaultCharacter!.name} onChange={(e) => dispatch(setDefaultCharacter(e.target.value))}>
                                 {characters.map((character) => (
                                     <option key={character.name} value={character.name}>
                                         {character.name}

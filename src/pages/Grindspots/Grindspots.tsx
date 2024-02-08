@@ -93,7 +93,7 @@ function GrindSpots() {
     }, [grindspots, globalFilter, showGrindableAP, showGrindableDP, defaultCharacter, filterAP, filterDP]);
     return (
         <div className="grindspots-container">
-            <DataTable tableStyle={{ minWidth: "94.5vw" }}
+            <DataTable tableStyle={{ minWidth: "93vw" }}
                 header={() => (
                     <div style={{
                         display: "flex",

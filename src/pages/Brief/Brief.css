@@ -1,0 +1,33 @@
+.brief-container {
+    width: 95.5vw;
+    height: 96.7vh;
+    margin: 0 auto;
+    color: #fff;
+    display: flex;
+    flex-direction: row;
+    overflow: scroll;
+    /* background-color: green; */
+}
+
+.brief-left {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 50px;
+    padding-top: 25px;
+    position: absolute;
+    padding-left: 40px;
+    max-width: 250px;
+    /* background-color: red; */
+}
+
+.brief-right {
+    width: 100%;
+    margin-left: 280px;
+    margin-right: 5px;
+    display: flex;
+    flex-direction: column;
+    /* background-color: blue; */
+}

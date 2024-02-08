@@ -19,6 +19,7 @@ import UpdateSettingsProvider from "../hooks/updateSettings";
 import UpdateReportsProvider from "../hooks/updateReports";
 import Report from "./Report/Report";
 import Brief from "./Brief/Brief";
+import Help from "./Help/Help";
 
 import 'primeflex/primeflex.css';
 import 'primereact/resources/primereact.css';
@@ -37,10 +38,11 @@ const MyRoutes = () => {
             <Route path="/summary" element={<Summary />} />
             <Route path="/grindspots" element={<GrindSpots />} />
             <Route path="/grindspot/:id" element={<GrindSpot />} />
-            <Route path="/timersettings" element={<TimerSettings />} />
+            {/* <Route path="/timersettings" element={<TimerSettings />} /> */}
             <Route path="/settings" element={<Settings />} />
             <Route path="/report" element={<Report />} />
             <Route path="/brief/:id" element={<Brief />} />
+            <Route path="/help" element={<Help />} />
           </Routes>
         </Layout>
       </div>

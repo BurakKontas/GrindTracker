@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChartImage, HomePageImage, FireImage, AlarmImage, SettingsImage, SwordShieldImage } from '../../constants/base64images';
+import { ChartImage, HomePageImage, FireImage, AlarmImage, SettingsImage, SwordShieldImage, HelpImage } from '../../constants/base64images';
 
 
 export type MenuItemsPropsType = {
@@ -11,11 +11,11 @@ export type MenuItemsPropsType = {
 
 
 export const MenuItems: MenuItemsPropsType[] = [
-    {
-        Icon: <HomePageImage />,
-        name: "Homepage",
-        path: "/",
-    },
+    // {
+    //     Icon: <HomePageImage />,
+    //     name: "Homepage",
+    //     path: "/",
+    // },
     {
         Icon: <ChartImage />,
         name: "Grind Summary",
@@ -26,14 +26,19 @@ export const MenuItems: MenuItemsPropsType[] = [
         name: "Grindspots",
         path: "/grindspots",
     },
-    {
-        Icon: <AlarmImage />,
-        name: "Boss Timer Settings",
-        path: "/timersettings",
-    },
+    // {
+    //     Icon: <AlarmImage />,
+    //     name: "Boss Timer Settings",
+    //     path: "/timersettings",
+    // },
 ]
 
 export const UtilityMenuItems: MenuItemsPropsType[] = [
+    {
+        Icon: <HelpImage />,
+        name: "Help",
+        path: "/help",
+    },
     {
         Icon: <SettingsImage />,
         name: "Settings",
