@@ -36,6 +36,11 @@ class BdolyticsService {
     }
 
     async getImage(image: string): Promise<string> {
+        const cachedImage = sessionStorage.getItem(image.toLowerCase());
+        if (cachedImage) {
+            return cachedImage;
+        }
+
         try {
             const baseURL = 'https://cdn.bdolytics.com/img';
             const url = `${baseURL}/${image.toLowerCase()}.webp`;
@@ -53,12 +58,16 @@ class BdolyticsService {
             const base64 = btoa(binary);
             const dataURL = `data:image/webp;base64,${base64}`;
 
+            // Cache the image in session storage
+            sessionStorage.setItem(image.toLowerCase(), dataURL);
+
             return dataURL;
         } catch (error) {
             console.error('Error fetching image:', error);
             throw error;
         }
     }
+
 
     async getMarketPriceOfItems(): Promise<BdolyticsMarketDataResponse> {
         const storedData = sessionStorage.getItem(`${this.region}_market_price_data`);
