@@ -11,29 +11,10 @@ import { BdolyticsTooltipTypes } from "../../../types/Bdolytics/TooltipTypes";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { Chart, registerables } from 'chart.js';
+import { getReportByGrindspot } from "../../../redux/Reports/slice";
+import { formatDate } from "../../../helpers/formatDate";
 
 Chart.register(...registerables);
-
-const generateRandomDate = () => {
-    const start = new Date(2022, 0, 1); // 2022-01-01
-    const end = new Date(2022, 11, 31); // 2022-12-31
-    const randomDate = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
-    const formattedDate = randomDate.toISOString().split('T')[0]; // 'YYYY-MM-DD' formatında dönüştürme
-    return formattedDate;
-};
-
-const generateRandomData = () => {
-    const newData = [];
-    for (let i = 0; i < 100; i++) {
-        newData.push({
-            date: generateRandomDate(),
-            value: Math.floor(Math.random() * 1000000000), // Rastgele bir değer
-        });
-    }
-    return newData;
-};
-
-const data = generateRandomData();
 
 const formatValue = (value: number) => {
     const suffixes = ['', 'K', 'M', 'B', 'T']; // Sırasıyla: birim, bin, milyon, milyar, trilyon
@@ -54,6 +35,7 @@ const Startup = () => {
     const defaultCharacter = useAppSelector(getDefaultCharacter)
     const [grindspot, setGrindspot] = React.useState<BdolyticsGrindspotResponse>();
     const [image, setImage] = React.useState<string>("")
+    const reports = useAppSelector(state => getReportByGrindspot(state, parseInt(grindspotid!)));
 
 
     React.useEffect(() => {
@@ -117,11 +99,11 @@ const Startup = () => {
                 <Line
                     style={{ width: "50vw", height: "50vh" }}
                     data={{
-                        labels: data.slice(-30).map(item => item.date), // Son 30 veri etiketlerini alır
+                        labels: reports.slice(-30).map(item => formatDate(item.date)), // Son 30 veri etiketlerini alır
                         datasets: [
                             {
                                 label: 'Value',
-                                data: data.slice(-30).map(item => item.value), // Son 30 veri değerlerini alır
+                                data: reports.slice(-30).map(item => item.totalSilver), // Son 30 veri değerlerini alır
                                 borderColor: '#8884d8', // Çizgi rengi
                                 fill: false // Alan doldurmayı devre dışı bırakır
                             }
@@ -134,6 +116,9 @@ const Startup = () => {
                                     callback: (value) => formatValue(parseInt(value as string)) // Eksen değerlerini okunabilir formata dönüştür
                                 }
                             },
+                            x: {
+                                display: false,
+                            },
                         },
                         plugins: {
                             tooltip: {
@@ -142,7 +127,7 @@ const Startup = () => {
                                 }
                             },
                             legend: {
-                                display: false // Açıklamayı gizle
+                                display: false
                             }
                         }
                     }}
