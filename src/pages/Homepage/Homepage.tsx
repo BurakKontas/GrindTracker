@@ -5,15 +5,18 @@ import { test, testSelector } from "../../redux/Bdolytics/slice";
 
 import "./Homepage.css";
 import { updateReportProps, updateReporting } from "../../redux/Reports/slice";
+import { useOverwolf } from "../../hooks/useOverwolf";
 
 function Homepage() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const { onMessageReceived, getCurrentWindow, closeWindow } = useOverwolf();
+
   React.useEffect(() => {
     navigate("/summary")
-    //@ts-ignore
-    window.overwolf.windows.onMessageReceived.addListener((message) => {
-      if(message.id === "result") {
+
+    onMessageReceived((message) => {
+      if (message.id === "result") {
         console.log(message.content);
         dispatch(updateReportProps({
           grindspotId: message.content.grindspotid,
@@ -24,7 +27,6 @@ function Homepage() {
         navigate("/report");
       }
     });
-    return () => window.removeEventListener("storage", () => {});
   }, [])
 
   return (

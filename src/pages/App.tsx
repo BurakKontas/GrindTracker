@@ -27,6 +27,7 @@ import 'primereact/resources/themes/md-dark-indigo/theme.css';
 import 'primeicons/primeicons.css';
 
 import "./App.css";
+import OverwolfProvider from "../hooks/useOverwolf";
 
 const MyRoutes = () => {
   return (
@@ -53,17 +54,19 @@ const MyRoutes = () => {
 export function Providers({ children }: { children: React.ReactElement}) {
   return (
     <Provider store={store}>
-      <AuthProvider>
-        <BdolyticsAPIProvider>
-            <PrimeReactProvider>
-              <UpdateSettingsProvider>
-                <UpdateReportsProvider>
-                  {children}
-                </UpdateReportsProvider>
-              </UpdateSettingsProvider>
-            </PrimeReactProvider>
-        </BdolyticsAPIProvider>
-      </AuthProvider>
+      <OverwolfProvider>
+        <AuthProvider>
+          <BdolyticsAPIProvider>
+              <PrimeReactProvider>
+                <UpdateSettingsProvider>
+                  <UpdateReportsProvider>
+                    {children}
+                  </UpdateReportsProvider>
+                </UpdateSettingsProvider>
+              </PrimeReactProvider>
+          </BdolyticsAPIProvider>
+        </AuthProvider>
+      </OverwolfProvider>
     </Provider>
   );
 }

@@ -5,6 +5,7 @@ import "./Tracker.css";
 import { useBdolyticsAPI } from "../../../hooks/useBdolyticsApi";
 import { BdolyticsGrindspotResponse } from "../../../types/Bdolytics/Grindspot";
 import { formatTime } from "../../../helpers/formatTime";
+import { useOverwolf } from "../../../hooks/useOverwolf";
 
 const Tracker = () => {
     const { grindspotid, id } = useParams();
@@ -15,6 +16,8 @@ const Tracker = () => {
     const [isRunning, setIsRunning] = React.useState(true);
     const [isHovering, setIsHovering] = React.useState(false);
     const navigate = useNavigate();
+    const { getWindow, sendMessage, getCurrentWindow, closeWindow, restoreWindow } = useOverwolf();
+
 
     React.useEffect(() => {
         const time = window.location.href.split("?time=")[1];
@@ -37,23 +40,17 @@ const Tracker = () => {
         return () => clearInterval(interval);
     }, [isRunning]); 
 
-    function finish() {
-        //@ts-ignore
-        window.overwolf.windows.getWindow("desktop", (result) => {
-        // window.overwolf.windows.getWindow("app_window", (result) => {
-            //@ts-ignore
-            window.overwolf.windows.sendMessage(result.window.id, "result", { grindspotid, id, time: timer }, function (response) {
-                //@ts-ignore
-                window.overwolf.windows.getCurrentWindow((result) => {
-                    //@ts-ignore
-                    window.overwolf.windows.close(result.window.id);
+    const finish = () => {
+        // getWindow("app_window", (result) => {
+        getWindow("desktop", (result) => {
+            sendMessage(result.window.id, "result", { grindspotid, id, time: timer }, (response) => {
+                getCurrentWindow((currentWindow) => {
+                    closeWindow(currentWindow.window.id);
+                    restoreWindow(result.window.id);
                 });
-                //@ts-ignore
-                window.overwolf.windows.restore(result.window.id);
             });
         });
-
-    }
+    };
 
     return (
         <div className="tracker-container" style={{

@@ -3,6 +3,7 @@ import { useAppSelector } from "../../redux/hooks";
 import { getLanguage, getRegion } from "../../redux/Settings/slice";
 import { useBdolyticsAPI } from "../../hooks/useBdolyticsApi";
 import { BdolyticsTooltipTypes } from "../../types/Bdolytics/TooltipTypes";
+import { useOverwolf } from "../../hooks/useOverwolf";
 
 export interface Item {
     id: number;
@@ -30,6 +31,7 @@ export const DropItem = ({ drop, type, containerStyle, inlineElement }: Props) =
     const language = useAppSelector(getLanguage)
     const region = useAppSelector(getRegion)
     const { getImage } = useBdolyticsAPI()
+    const { openUrlInDefaultBrowser } = useOverwolf()
 
     let [image, setImage] = React.useState<string>("")
     React.useEffect(() => {
@@ -50,9 +52,13 @@ export const DropItem = ({ drop, type, containerStyle, inlineElement }: Props) =
     }, [drop.id, drop.image, getImage]);
 
     return (
-        <a href={`https://bdolytics.com/${language}/${region}/db/${type}/${drop.id}`} style={{
-            ...containerStyle
-        }}
+        <a 
+            onClick={(event) => {
+                event.preventDefault();
+                openUrlInDefaultBrowser(`https://bdolytics.com/${language}/${region}/db/${type}/${drop.id}`)
+            }}
+            href={`https://bdolytics.com/${language}/${region}/db/${type}/${drop.id}`} 
+            style={{...containerStyle}}
             key={drop.id + drop.name}
         >
             <div style={{
