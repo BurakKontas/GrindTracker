@@ -1,6 +1,6 @@
 const iconsPath = "../../icons/Screenshots/";
 
-export const GettingStartedGalleryData = {
+export const GettingStartedGalleryData: GettingStartedGalleryData = {
     images: {
         how_to_use_grindtracker_app: [
             {
