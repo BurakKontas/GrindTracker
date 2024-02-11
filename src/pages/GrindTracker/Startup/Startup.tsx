@@ -96,42 +96,44 @@ const Startup = () => {
                 })}
             </div>
             <div style={{ display:"flex", justifyContent:"center", alignItems:"center" }}>
-                <Line
-                    style={{ width: "50vw", height: "50vh" }}
-                    data={{
-                        labels: reports.slice(-30).map(item => formatDate(item.date)), // Son 30 veri etiketlerini alır
-                        datasets: [
-                            {
-                                label: 'Value',
-                                data: reports.slice(-30).map(item => item.totalSilver), // Son 30 veri değerlerini alır
-                                borderColor: '#8884d8', // Çizgi rengi
-                                fill: false // Alan doldurmayı devre dışı bırakır
-                            }
-                        ]
-                    }}
-                    options={{
-                        scales: {
-                            y: {
-                                ticks: {
-                                    callback: (value) => formatValue(parseInt(value as string)) // Eksen değerlerini okunabilir formata dönüştür
+                {(reports.length > 0) && 
+                    <Line
+                        style={{ width: "50vw", height: "50vh" }}
+                        data={{
+                            labels: reports.slice(-30).map(item => formatDate(item.date)), // Son 30 veri etiketlerini alır
+                            datasets: [
+                                {
+                                    label: 'Total Silver',
+                                    data: reports.slice(-30).map(item => item.totalSilver), // Son 30 veri değerlerini alır
+                                    borderColor: '#8884d8', // Çizgi rengi
+                                    fill: false // Alan doldurmayı devre dışı bırakır
                                 }
+                            ]
+                        }}
+                        options={{
+                            scales: {
+                                y: {
+                                    ticks: {
+                                        callback: (value) => formatValue(parseInt(value as string)) // Eksen değerlerini okunabilir formata dönüştür
+                                    }
+                                },
+                                x: {
+                                    display: false,
+                                },
                             },
-                            x: {
-                                display: false,
-                            },
-                        },
-                        plugins: {
-                            tooltip: {
-                                callbacks: {
-                                    label: (tooltipItem) => `${tooltipItem.formattedValue} Silver` // Tooltip'deki değeri kullan
+                            plugins: {
+                                tooltip: {
+                                    callbacks: {
+                                        label: (tooltipItem) => `${tooltipItem.formattedValue} Silver` // Tooltip'deki değeri kullan
+                                    }
+                                },
+                                legend: {
+                                    display: false
                                 }
-                            },
-                            legend: {
-                                display: false
                             }
-                        }
-                    }}
-                />
+                        }}
+                    />
+                }
             </div>
             <button 
                 onClick={() => navigate(`/tracker/${grindspotid}/${id}`)}

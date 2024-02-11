@@ -37,10 +37,10 @@ header h1 {
     transition: width 0.3s ease;
     background-color: #272727;
     overflow: hidden;
-    position: absolute;
+    position: fixed;
     left: 0;
     height: 739px;
-    z-index: 9999;
+    z-index: 9;
 }
 
 .drawer-menu-container:hover {

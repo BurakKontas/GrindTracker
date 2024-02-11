@@ -69,7 +69,6 @@ class BackgroundController {
     let supported = await this.isSupportedGameRunning()
     let condition = running && supported
 
-    this.showGrindTracker();
     if(condition) {
       this._windows[kWindowNames.app].restore();
     }

@@ -1,9 +1,10 @@
 import React from "react";
 import { OverwolfGetHotkeysResult, useOverwolf } from "../../hooks/useOverwolf";
+import GettingStarted from "./GettingStarted";
 
 import "./Help.css";
 
-function HelpSection({children, title, subtitle}: {children: React.ReactNode, title: string, subtitle?: string}) {
+export function HelpSection({children, title, subtitle}: {children: React.ReactNode, title: string, subtitle?: string}) {
     return (
         <div className="helpsection-container">
             <div className="helpsection-left">
@@ -17,9 +18,21 @@ function HelpSection({children, title, subtitle}: {children: React.ReactNode, ti
     );
 }
 
+function HelpHeader() {
+    return (
+        <div className="help-header-container">
+            <h1>Help</h1>
+            <p>Manage your account settings and preferences.</p>
+        </div>
+    )
+}
+
 function Help() {
     const { getHotkeys } = useOverwolf();
     const [hotkeys, setHotkeys] = React.useState<OverwolfGetHotkeysResult[]>([]);
+    const galleria = React.useRef(null);
+
+    const [activeIndex, setActiveIndex] = React.useState(0);
 
     React.useEffect(() => {
         async function init() {
@@ -30,30 +43,25 @@ function Help() {
     },[])
 
     return (
-        <div>
-            <div>
-                <HelpSection title="Shortcuts" subtitle="This section contains shortcuts to use app efficiently">
+        <div className="help-container">
+        <HelpHeader />
+        <div className="divider" />
+            <div className="help-section-container">
+                <HelpSection title="Shortcuts" subtitle="This section provides essential shortcuts for optimizing app usage. (Click on each shortcut to customize)">
                     <div>
                         {hotkeys.map((hotkey) => {
                             return (
-                                <p>
-                                    <span className="help-shortcuts-hotkey">{hotkey.binding}</span>{" "}{hotkey.title}
-                                    <a href={"overwolf://settings/games-overlay?hotkey="+hotkey.name}>Edit</a>
+                                <p className="shortcut-item">
+                                    <a href={`overwolf://settings/games-overlay?hotkey=${hotkey.name}`} className="shortcut-key">{hotkey.binding}</a>{" "}
+                                    <span className="shortcut-title">{hotkey.title}</span>{" "}
                                 </p>
                             )
                         })}
                     </div>
                 </HelpSection>
             </div>
-            <div>
-                {/* Getting Started */}
-            </div>
-            <div>
-                {/* FAQ */}
-            </div>
-            <div>
-                {/* Contact */}
-            </div>
+            <div className="divider" />
+            <GettingStarted />
         </div>
     );
 }

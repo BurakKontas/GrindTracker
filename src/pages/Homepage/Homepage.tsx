@@ -7,13 +7,16 @@ import "./Homepage.css";
 import { updateReportProps, updateReporting } from "../../redux/Reports/slice";
 import { useOverwolf } from "../../hooks/useOverwolf";
 
+//only used for listenings etc.
 function Homepage() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { onMessageReceived, getCurrentWindow, closeWindow } = useOverwolf();
 
+
   React.useEffect(() => {
-    navigate("/summary")
+    // navigate("/summary")
+    navigate("/help")
 
     onMessageReceived((message) => {
       if (message.id === "result") {
@@ -30,9 +33,7 @@ function Homepage() {
   }, [])
 
   return (
-    <div className="homepage-container">
-      <p>Homepage</p>
-    </div>
+    <></>
   );
 }
 

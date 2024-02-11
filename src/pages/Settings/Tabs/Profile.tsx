@@ -56,6 +56,7 @@ function ProfileTab() {
             <div className="profile-tab-container-header">
                 <h1>Profile</h1>
                 <p>Manage your profile information.</p>
+                <p>(Your overwolf profile)</p>
             </div>
             <div>
                 <img className="avatar-image" src={user?.avatarUrl} alt="avatar" />
@@ -68,7 +69,7 @@ function ProfileTab() {
                     <label>Default Character:</label>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                         {characters.length > 0 ? (
-                            <select style={{ marginLeft: 10, paddingRight: 76 }} value={defaultCharacter!.name} onChange={(e) => dispatch(setDefaultCharacter(e.target.value))}>
+                            <select style={{ width: 150 }} value={defaultCharacter!.name} onChange={(e) => dispatch(setDefaultCharacter(e.target.value))}>
                                 {characters.map((character) => (
                                     <option key={character.name} value={character.name}>
                                         {character.name}
@@ -85,7 +86,7 @@ function ProfileTab() {
                     <label>Region:</label>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                         {/* @ts-ignore */}
-                        <select style={{ marginLeft: 10, paddingRight: 98 }} value={region} onChange={(e) => dispatch(setRegion(e.target.value))}>
+                        <select style={{ marginLeft: 10, width: 150 }} value={region} onChange={(e) => dispatch(setRegion(e.target.value))}>
                             {Object.keys(BdolyticsRegion).map((region) => (
                                 <option key={region} value={region}>
                                     {region}
@@ -99,7 +100,7 @@ function ProfileTab() {
                     <label>Language:</label>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                         {/* @ts-ignore */}
-                        <select style={{ marginLeft: 10, paddingRight: 38 }} value={language} onChange={(e) => dispatch(setLanguage(e.target.value))}>
+                        <select style={{ marginLeft: 10, width: 150 }} value={language} onChange={(e) => dispatch(setLanguage(e.target.value))}>
                             {Object.entries(languageMap).map(([languageValue, languageKey]) => (
                                 <option key={languageValue} value={languageValue}>
                                     <p>{languageKey}</p>

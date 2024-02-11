@@ -6,44 +6,6 @@ import CreditsTab from './Tabs/Credits';
 import AboutDeveloperTab from './Tabs/AboutDeveloper';
 
 import "./Settings.css";
-import { useBdolyticsAPI } from '../../hooks/useBdolyticsApi';
-
-const Tabs = {
-    "profile": () => <ProfileTab />,
-    "settings": () => <SettingsTab />,
-    "credits": () => <CreditsTab />,
-    "aboutDeveloper": () => <AboutDeveloperTab />
-}
-
-
-type Tab = {
-    name: string;
-    label: string;
-};
-
-type TabBarButtonsProps = {
-    activeTab: number;
-    setActiveTab: Dispatch<SetStateAction<number>>;
-};
-
-function TabBarButtons({ activeTab, setActiveTab }: TabBarButtonsProps) {
-    const tabs: Tab[] = [
-        { name: "profile", label: "Profile" },
-        { name: "settings", label: "Settings" },
-        { name: "credits", label: "Credits" },
-        { name: "aboutDeveloper", label: "About Developer" }
-    ];
-
-    return (
-        <div className="settings-tabbar-container">
-            {tabs.map((tab, index) => (
-                <button key={index} className={`tabbar-button ${activeTab === index ? "active" : ""}`} onClick={() => setActiveTab(index)}>
-                    {tab.label}
-                </button>
-            ))}
-        </div>
-    );
-}
 
 function SettingsHeader() {
     return (
@@ -56,10 +18,8 @@ function SettingsHeader() {
 }
 
 function Settings() {
-    // const [activeTab, setActiveTab] = React.useState(1);
     return (
         <div className="settings-container">
- 
             <SettingsHeader />
             <div className="divider" />
             <ProfileTab />
@@ -67,8 +27,9 @@ function Settings() {
             <SettingsTab />
             <div className="divider" />
             <CreditsTab />
-            {/* <div className="divider" />
-            <AboutDeveloperTab /> */}
+            <div className="divider" />
+            <AboutDeveloperTab />
+            <div style={{ paddingBottom: 30 }}></div>
         </div>
     )
 }

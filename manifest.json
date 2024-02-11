@@ -69,6 +69,7 @@
         "transparent": true,
         "in_game_only": true,
         "resizable": false,
+        "keep_window_location": false,
         "override_on_update": true,
         "size": {
           "width": 1212,

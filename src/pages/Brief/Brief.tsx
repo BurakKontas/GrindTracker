@@ -32,7 +32,7 @@ function Brief() {
             id: item.id,
             item: item,
             dropped: dropped,
-            droppedPerHour: dropped / (totalHoursSpent / 3600)
+            droppedPerHour: (dropped / (totalHoursSpent / 3600)).toFixed(2)
         }
     })
 

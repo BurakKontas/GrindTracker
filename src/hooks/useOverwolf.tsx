@@ -5,13 +5,13 @@ import { createContext, useContext, useState } from "react";
 //@ts-check
 export const OverwolfContext = createContext<OverwolfProviderValueType>({
     getHotkeys: () => Promise.resolve([]),
-    onMessageReceived: () => {},
-    getWindow: () => {},
-    sendMessage: () => {},
+    onMessageReceived: (callback: (message: any) => void) => {},
+    getWindow: (windowName: string) => {},
+    sendMessage: (windowId: string, title: string, content: any, callback: (response: any) => void) => {},
     getCurrentWindow: () => {},
-    closeWindow: () => {},
-    restoreWindow: () => {},
-    openUrlInDefaultBrowser: () => {}
+    closeWindow: (windowId: string) => {},
+    restoreWindow: (windowId: string) => {},
+    openUrlInDefaultBrowser: (url: string) => {}
 })
 
 export const useOverwolf = () => useContext(OverwolfContext)
@@ -23,9 +23,9 @@ export type OverwolfProviderPropsType = {
 export type OverwolfProviderValueType = {
     getHotkeys: () => Promise<OverwolfGetHotkeysResult[]>;
     onMessageReceived: (callback: (message: any) => void) => void;
-    getWindow: (windowName: string, callback: (result: any) => void) => void;
+    getWindow: (windowName: string) => Promise<any>;
     sendMessage: (windowId: string, title: string, content: any, callback: (response: any) => void) => void;
-    getCurrentWindow: (callback: (result: any) => void) => void;
+    getCurrentWindow: () => Promise<any>;
     closeWindow: (windowId: string) => void;
     restoreWindow: (windowId: string) => void;
     openUrlInDefaultBrowser: (url: string) => void;
@@ -37,7 +37,7 @@ const OverwolfProvider: React.FC<OverwolfProviderPropsType> = (props) => {
     const getHotkeys = (): Promise<OverwolfGetHotkeysResult[]> => {
         return new Promise((resolve, _) => {
             window.overwolf.settings.hotkeys.get((result) => {
-                let hotkeys = result.games[10864]
+                let hotkeys = result.games[bdogameid]
                 resolve(hotkeys)
             });
         });
@@ -49,16 +49,25 @@ const OverwolfProvider: React.FC<OverwolfProviderPropsType> = (props) => {
         });
     }
 
-    const getWindow = (windowName: string, callback: (result: any) => void) => {
-        window.overwolf.windows.getWindow(windowName, callback);
+    const getWindow = async (windowName: string) => {
+        return new Promise((resolve, _) => {
+            window.overwolf.windows.getWindow(windowName, (result) => {
+                console.log(result)
+                resolve(result)
+            });
+        });
     }
 
     const sendMessage = (windowId: string, title: string, content: any, callback: (response: any) => void) => {
         window.overwolf.windows.sendMessage(windowId, title, content, callback);
     }
 
-    const getCurrentWindow = (callback: (result: any) => void) => {
-        window.overwolf.windows.getCurrentWindow(callback);
+    const getCurrentWindow = async () => {
+        return new Promise((resolve, _) => {
+            window.overwolf.windows.getCurrentWindow((result) => {
+                resolve(result);
+            });
+        });
     }
 
     const closeWindow = (windowId: string) => {

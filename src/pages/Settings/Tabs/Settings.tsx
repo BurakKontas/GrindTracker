@@ -166,7 +166,7 @@ function SettingsTab() {
                     </div>
                 </div>
                 <div className="settings-tab-character-details-table">
-                    <DataTable value={characters} tableStyle={{ minWidth: '50rem' }}>
+                    <DataTable value={characters} tableStyle={{ minWidth: '50.5rem' }}>
                         <Column field="name" header="Character Name" />
                         <Column field="class" header="Character Class" />
                         <Column field="level" header="Character Level" />

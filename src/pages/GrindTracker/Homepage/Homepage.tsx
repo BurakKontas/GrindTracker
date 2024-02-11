@@ -10,27 +10,25 @@ import "./Homepage.css";
 
 function Homepage() {
     const { getGrindspots, getImage } = useBdolyticsAPI();
-    const defaultCharacter = useAppSelector(getDefaultCharacter)
+    const defaultCharacter = useAppSelector(getDefaultCharacter);
     const navigate = useNavigate();
-    
+
     const [grindspots, setGrindspots] = React.useState<BdolyticsGrindspotsResponse>();
     const [search, setSearch] = React.useState("");
+    const [minAp, setMinAp] = React.useState<number>(0); // Min AP değeri
+    const [minDp, setMinDp] = React.useState<number>(0); // Min DP değeri
     const [uuid, _] = React.useState<string>(uuidv4());
 
     React.useEffect(() => {
-        console.log("fetching grindspots")
         const fetchGrindspots = async () => {
             const response = await getGrindspots();
             setGrindspots(response!);
-            console.log(response)
         }
         fetchGrindspots();
-        console.log(window)
-
     }, []);
 
-    function GrindSpot({ grindspot }: { grindspot: Grindspot}) {
-        const [image, setImage] = React.useState<string>("")
+    function GrindSpot({ grindspot }: { grindspot: Grindspot }) {
+        const [image, setImage] = React.useState<string>("");
 
         React.useEffect(() => {
             const fetchImage = async () => {
@@ -38,9 +36,7 @@ function Homepage() {
                 if (cachedImage) {
                     setImage(cachedImage);
                 } else {
-                    // Resmi al ve önbellekte sakla
                     const response = await getImage(grindspot.icon_image);
-                    console.log("response sent")
                     sessionStorage.setItem(`image_${grindspot.icon_image}`, response!);
                     setImage(response!);
                 }
@@ -50,9 +46,7 @@ function Homepage() {
         }, [grindspot.icon_image, getImage]);
 
         return (
-            <button key={grindspot.id} className="grindtracker-grindspot"
-                onClick={() => navigate(`/startup/${grindspot.id}/${uuid}`)}
-            >
+            <button key={grindspot.id} className="grindtracker-grindspot" onClick={() => navigate(`/startup/${grindspot.id}/${uuid}`)}>
                 <img src={image} style={{ width: 40, height: 40 }} alt={grindspot.name} />
                 <p>
                     {grindspot.name}
@@ -71,22 +65,43 @@ function Homepage() {
 
     return (
         <div className="grindtracker-container">
-            <input 
+            <input
                 className="grindtracker-search"
-                type="text" 
-                id="search" 
-                name="search" 
+                type="text"
+                id="search"
+                name="search"
                 placeholder="Search for Grindspot"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
             />
+            <div className="filter-container">
+                <label htmlFor="minAp">Minimum AP:</label>
+                <input
+                    type="number"
+                    id="minAp"
+                    name="minAp"
+                    value={minAp}
+                    onChange={(e) => setMinAp(parseInt(e.target.value))}
+                />
+                <label htmlFor="minDp">Minimum DP:</label>
+                <input
+                    type="number"
+                    id="minDp"
+                    name="minDp"
+                    value={minDp}
+                    onChange={(e) => setMinDp(parseInt(e.target.value))}
+                />
+            </div>
             <div className="grindtracker-grindspots">
                 {grindspots?.data.map((grindspot) => {
-                    if (grindspot.name.toLowerCase().includes(search.toLowerCase())) {
+                    if (
+                        grindspot.name.toLowerCase().includes(search.toLowerCase()) && // Arama filtresi
+                        grindspot.ap >= (minAp || 0) && // Minimum AP filtresi
+                        grindspot.dp >= (minDp || 0) // Minimum DP filtresi
+                    ) {
                         return <GrindSpot grindspot={grindspot} />
                     }
-                })
-                }
+                })}
             </div>
         </div>
     )

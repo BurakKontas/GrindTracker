@@ -9,7 +9,6 @@ import { useOverwolf } from "../../../hooks/useOverwolf";
 
 const Tracker = () => {
     const { grindspotid, id } = useParams();
-    //get time from query if exists
     const [timer, setTimer] = React.useState(0);
     const { getGrindspot } = useBdolyticsAPI();
     const [grindspot, setGrindspot] = React.useState<BdolyticsGrindspotResponse>();
@@ -40,15 +39,13 @@ const Tracker = () => {
         return () => clearInterval(interval);
     }, [isRunning]); 
 
-    const finish = () => {
-        // getWindow("app_window", (result) => {
-        getWindow("desktop", (result) => {
-            sendMessage(result.window.id, "result", { grindspotid, id, time: timer }, (response) => {
-                getCurrentWindow((currentWindow) => {
-                    closeWindow(currentWindow.window.id);
-                    restoreWindow(result.window.id);
-                });
-            });
+    const finish = async () => {
+        let window = await getWindow("app_window");
+        let currentWindow = await getCurrentWindow();
+        console.log(window, currentWindow)
+        sendMessage(window.window.id, "result", { grindspotid, id, time: timer }, (response) => {
+            closeWindow(currentWindow.window.id);
+            restoreWindow(window.window.id);
         });
     };
 

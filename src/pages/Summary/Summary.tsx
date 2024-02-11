@@ -52,6 +52,7 @@ function Summary() {
             <div className="summary-last-reports">
                 <LastReports />
             </div>
+            <div style={{marginBottom: 20}}></div>
         </div>
     )
 }
