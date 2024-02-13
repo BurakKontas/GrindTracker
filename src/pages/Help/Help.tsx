@@ -1,9 +1,8 @@
 import React from "react";
-import { OverwolfGetHotkeysResult, useOverwolf } from "../../hooks/useOverwolf";
 import GettingStarted from "./GettingStarted";
+import Hotkeys from "./Hotkeys";
 
 import "./Help.css";
-import Hotkeys from "./Hotkeys";
 
 export function HelpSection({children, title, subtitle}: {children: React.ReactNode, title: string, subtitle?: string}) {
     return (
@@ -34,9 +33,9 @@ function Help() {
         <HelpHeader />
         <div className="divider" />
             <Hotkeys />
-            <div className="divider" />
-            <GettingStarted />
-            <div className="divider" />
+            {/* <div className="divider" />
+            <GettingStarted /> */}
+            {/* <div className="divider" /> */}
             {/* FAQ ? */}
         </div>
     );

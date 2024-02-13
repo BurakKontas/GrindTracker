@@ -8,12 +8,18 @@ import "./Help.css";
 
 const GettingStarted = () => {
     const gallery = React.useRef(null);
-    const [activeTopic, setActiveTopic] = React.useState("");
+    const [activeTopic, setActiveTopic] = React.useState("how_to_use_grindtracker_app");
 
     const itemTemplate = (item: GettingStartedGalleryDataImage[0]) => {
         return <img src={item.src} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
     }
 
+    React.useEffect(() => {
+        // @ts-ignore
+        gallery.current.show();
+        // @ts-ignore
+        gallery.current.hide();
+    }, [])
     const openGallery = (topic: string) => {
         setActiveTopic(topic);
         // @ts-ignore
@@ -40,6 +46,7 @@ const GettingStarted = () => {
                             <button onClick={() => openGallery('how_to_check_grindspot_statistics')}>How to check grindspot statistics?</button>
                             <button onClick={() => openGallery('how_to_check_grindspot_item_drop_rates_per_hour')}>How to check grindspot item drop rates per hour?</button>
                             <button onClick={() => openGallery('how_to_correct_wrong_report_data')}>How to correct wrong report data?</button>
+                            <button onClick={() => openGallery('how_to_change_hotkeys')}>How to change hotkeys?</button>
 
                         </div>
                     </HelpSection>
@@ -49,7 +56,7 @@ const GettingStarted = () => {
                 {/* @ts-ignore */}
                 <Galleria ref={gallery} value={GettingStartedGalleryData.images[activeTopic] || []} style={{ maxWidth: '80%', maxHeight: '95%' }}
                     circular fullScreen showItemNavigators showItemNavigatorsOnHover showIndicators showThumbnails={false} caption={caption} item={itemTemplate}
-                    />
+                />
             </div>
         </div>
     );

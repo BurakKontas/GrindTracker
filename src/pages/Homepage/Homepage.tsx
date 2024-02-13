@@ -15,8 +15,7 @@ function Homepage() {
 
 
   React.useEffect(() => {
-    // navigate("/summary")
-    navigate("/help")
+    navigate("/summary")
 
     onMessageReceived((message) => {
       if (message.id === "result") {

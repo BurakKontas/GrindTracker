@@ -8,7 +8,7 @@ export const OverwolfContext = createContext<OverwolfProviderValueType>({
     onMessageReceived: (callback: (message: any) => void) => {},
     getWindow: (windowName: string) => {},
     sendMessage: (windowId: string, title: string, content: any, callback: (response: any) => void) => {},
-    getCurrentWindow: () => {},
+    getCurrentWindow: () => Promise.resolve({}),
     closeWindow: (windowId: string) => {},
     restoreWindow: (windowId: string) => {},
     openUrlInDefaultBrowser: (url: string) => {}

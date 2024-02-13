@@ -11,6 +11,7 @@
 
 .grindspots-table {
     top:0;
+    height: 100vh;
     min-width: 101.6%;
     overflow: scroll;
     margin-bottom: 20px;

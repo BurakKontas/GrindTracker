@@ -50,3 +50,11 @@ header h1 {
 .content-container {
     margin-left: 50px;
 }
+
+.header-hotkeys {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 88%;
+    padding-left: 100px;
+}

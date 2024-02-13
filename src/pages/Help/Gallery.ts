@@ -4,27 +4,23 @@ export const GettingStartedGalleryData: GettingStartedGalleryData = {
     images: {
         how_to_use_grindtracker_app: [
             {
-                order: 1,
-                src: "image1.jpg",
-                title: "How to use GrindTracker?",
-                alt: "How to use GrindTracker?",
+                src: "how_to_use_grindtracker_app/image.jpg",
+                title: "Start GrindTracker",
+                alt: "Just start Black Desert Online and GrindTracker will start automatically. You can also start it manually by clicking on the GrindTracker icon in the taskbar.",
             },
             {
-                order: 2,
-                src: "image2.jpg",
+                src: "how_to_use_grindtracker_app/Screenshot_1.png",
                 title: "How to use GrindTracker? Part 2",
                 alt: "How to use GrindTracker? Part 2",
             }
         ],
         how_to_addchange_default_character: [
             {
-                order: 1,
                 src: "image3.jpg",
                 title: "How to add/change the default character?",
                 alt: "How to add/change the default character?",
             },
             {
-                order: 2,
                 src: "image4.jpg",
                 title: "How to add/change the default character? Part 2",
                 alt: "How to add/change the default character? Part 2",
@@ -32,13 +28,11 @@ export const GettingStartedGalleryData: GettingStartedGalleryData = {
         ],
         how_to_check_grindspot_statistics: [
             {
-                order: 1,
                 src: "image5.jpg",
                 title: "How to check grindspot statistics?",
                 alt: "How to check grindspot statistics?",
             },
             {
-                order: 2,
                 src: "image6.jpg",
                 title: "How to check grindspot statistics? Part 2",
                 alt: "How to check grindspot statistics? Part 2",
@@ -46,13 +40,11 @@ export const GettingStartedGalleryData: GettingStartedGalleryData = {
         ],
         how_to_check_grindspot_item_drop_rates_per_hour: [
             {
-                order: 1,
                 src: "image7.jpg",
                 title: "How to check grindspot item drop rates per hour?",
                 alt: "How to check grindspot item drop rates per hour?",
             },
             {
-                order: 2,
                 src: "image8.jpg",
                 title: "How to check grindspot item drop rates per hour? Part 2",
                 alt: "How to check grindspot item drop rates per hour? Part 2",
@@ -60,18 +52,28 @@ export const GettingStartedGalleryData: GettingStartedGalleryData = {
         ],
         how_to_correct_wrong_report_data: [
             {
-                order: 1,
                 src: "image9.jpg",
                 title: "How to correct wrong report data?",
                 alt: "How to correct wrong report data?",
             },
             {
-                order: 2,
                 src: "image10.jpg",
                 title: "How to correct wrong report data? Part 2",
                 alt: "How to correct wrong report data? Part 2",
             }
-        ]
+        ],
+        how_to_change_hotkeys: [
+            {
+                src: "image11.jpg",
+                title: "How to change hotkeys?",
+                alt: "How to change hotkeys?",
+            },
+            {
+                src: "image12.jpg",
+                title: "How to change hotkeys? Part 2",
+                alt: "How to change hotkeys? Part 2",
+            }
+        ],
     }
 }
 
@@ -88,7 +90,6 @@ for (const key in GettingStartedGalleryData.images) {
 type GettingStartedGalleryData = {
     images: {
         [key: string]: {
-            order: number;
             src: string;
             title: string;
             alt: string;
