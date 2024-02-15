@@ -58,17 +58,56 @@ const BdolyticsAPIProvider: React.FC<BdolyticsAPIProviderPropsType> = (props) =>
     }, [language, region])
 
     const getGrindspots = async (page: BdolyticsGrindspotsPagesEnum = BdolyticsGrindspotsPagesEnum.PAGE1): Promise<BdolyticsGrindspotsResponse> => {
-        return await bdolyticsService.getGrindspots(page);
+        // Önbellek anahtarını oluştur
+        const cacheKey = `grindspots_${page}`;
+
+        // Önbellekteki veriyi kontrol et
+        const cachedGrindspots = sessionStorage.getItem(cacheKey);
+        if (cachedGrindspots) {
+            // Önbellekten veriyi al ve dön
+            return JSON.parse(cachedGrindspots);
+        } else {
+            // Önbellekte veri yoksa API'den veriyi getir ve önbelleğe ekle
+            const grindspots = await bdolyticsService.getGrindspots(page);
+            sessionStorage.setItem(cacheKey, JSON.stringify(grindspots));
+            return grindspots;
+        }
     };
 
     const getGrindspot = async (id: number | string): Promise<BdolyticsGrindspotResponse> => {
-        if(typeof id === "string") id = parseInt(id);
-        return await bdolyticsService.getGrindspot(id);
-    }
+        // Önbellek anahtarını oluştur
+        const cacheKey = `grindspot_${id}`;
+
+        // Önbellekteki veriyi kontrol et
+        const cachedGrindspot = sessionStorage.getItem(cacheKey);
+        if (cachedGrindspot) {
+            // Önbellekten veriyi al ve dön
+            return JSON.parse(cachedGrindspot);
+        } else {
+            // Önbellekte veri yoksa API'den veriyi getir ve önbelleğe ekle
+            let grindspotId: number = typeof id === "string" ? parseInt(id) : id;
+            const grindspot = await bdolyticsService.getGrindspot(grindspotId);
+            sessionStorage.setItem(cacheKey, JSON.stringify(grindspot));
+            return grindspot;
+        }
+    };
 
     const getItem = async (id: number | string): Promise<BdolyticsItemResponse> => {
-        if (typeof id === "string") id = parseInt(id);
-        return await bdolyticsService.getItem(id);
+        // Önbellek anahtarını oluştur
+        const cacheKey = `item_${id}`;
+
+        // Önbellekteki veriyi kontrol et
+        const cachedItem = sessionStorage.getItem(cacheKey);
+        if (cachedItem) {
+            // Önbellekten veriyi al ve dön
+            return JSON.parse(cachedItem);
+        } else {
+            // Önbellekte veri yoksa API'den veriyi getir ve önbelleğe ekle
+            let itemId: number = typeof id === "string" ? parseInt(id) : id;
+            const item = await bdolyticsService.getItem(itemId);
+            sessionStorage.setItem(cacheKey, JSON.stringify(item));
+            return item;
+        }
     }
 
     const getItems = async (ids: number[] | string[]): Promise<BdolyticsItemResponse[]> => {
@@ -80,8 +119,21 @@ const BdolyticsAPIProvider: React.FC<BdolyticsAPIProviderPropsType> = (props) =>
     }
 
     const getImage = async (image: string): Promise<string> => {
-        return await bdolyticsService.getImage(image);
-    }
+        // Önbellek anahtarını oluştur
+        const cacheKey = `image_${image}`;
+
+        // Önbellekteki veriyi kontrol et
+        const cachedImage = sessionStorage.getItem(cacheKey);
+        if (cachedImage) {
+            // Önbellekten veriyi al ve dön
+            return cachedImage;
+        } else {
+            // Önbellekte veri yoksa API'den veriyi getir ve önbelleğe ekle
+            const fetchedImage = await bdolyticsService.getImage(image);
+            sessionStorage.setItem(cacheKey, fetchedImage);
+            return fetchedImage;
+        }
+    };
 
     const getMarketPricesData = async (id: number | string): Promise<number | undefined> => {
         if (typeof id === "string") id = parseInt(id);
